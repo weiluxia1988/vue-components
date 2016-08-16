@@ -1,0 +1,6 @@
+@import '../base';
+$affix-prefix: v-affix;
+.#{$affix-prefix}{
+  position: fixed;
+  z-index: 9999;
+}

@@ -1,0 +1,41 @@
+@import '../base';
+$progress-prefix: v-progress;
+.#{$progress-prefix}-outer {
+  margin: 0 5px;
+}
+.#{$progress-prefix}-inner {
+  display: inline-block;
+  width: 100%;
+  background-color: #e4dbdb;
+  border-radius: 100px;
+}
+.#{$progress-prefix}-bg {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #2db7f5;
+  transition: all 0.3s linear 0s;
+  &:before{
+    content: "";
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-radius: 10px;
+    animation: progress-active 2s ease infinite;
+  }
+}
+@keyframes progress-active {
+  0% {
+    opacity: .3;
+    width: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}

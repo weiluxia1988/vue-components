@@ -1,0 +1,65 @@
+@import '../base';
+$message-prefix: v-message;
+$message-width: 335px;
+$message-padding: 16px;
+$message-margin-bottom: 10px;
+.#{$message-prefix}Group{
+  position: fixed;
+  z-index: 1050;
+  width: $message-width;
+  margin-right: 24px;
+  top: 24px;
+  right: 0px;
+}
+.#{$message-prefix}{
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px #d9d9d9;
+  background: #fff;
+  line-height: 1.5;
+  position: relative;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* 必需 */
+.#{$message-prefix}-transition {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: running;
+}
+.#{$message-prefix}-enter{
+  animation-name: MessageFadeIn;
+}
+.#{$message-prefix}-leave{
+  animation-name: MessageFadeOut;
+}
+
+@keyframes MessageFadeIn {
+  0% {
+    opacity: 0;
+    left: $message-width;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes MessageFadeOut {
+  0% {
+    opacity: 1;
+    margin-bottom: $message-margin-bottom;
+    padding-top: $message-padding;
+    padding-bottom: $message-padding;
+    max-height: 150px;
+  }
+  100% {
+    opacity: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 0;
+  }
+}

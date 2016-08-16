@@ -1,0 +1,118 @@
+@import '../base';
+$tooltip-prefix: v-tooltip;
+//** Tooltip max width
+$tooltip-max-width: 250px;
+//** Tooltip text color
+$tooltip-color: #fff;
+//** Tooltip background color
+$tooltip-bg: #000;
+$tooltip-opacity: 0.9;
+//** Tooltip arrow width
+$tooltip-arrow-width: 5px;
+//** Tooltip distance with trigger
+$tooltip-distance: $tooltip-arrow-width + 3;
+//** Tooltip arrow color
+$tooltip-arrow-color: $tooltip-bg;
+
+.#{$tooltip-prefix}{
+  opacity: $tooltip-opacity;
+  max-width: $tooltip-max-width;
+  &-top, &-topLeft, &-topRight {
+    padding: $tooltip-arrow-width 0 $tooltip-distance;
+  }
+  &-right, &-rightTop, &-rightBottom {
+    padding: 0 $tooltip-arrow-width 0 $tooltip-distance;
+  }
+  &-bottom, &-bottomLeft, &-bottomRight {
+    padding: $tooltip-distance 0 $tooltip-arrow-width;
+  }
+  &-left, &-leftTop, &-leftBottom {
+    padding: 0 $tooltip-distance 0 $tooltip-arrow-width;
+  }
+}
+.#{$tooltip-prefix}-tooltip-inner{
+  max-width: $tooltip-max-width;
+  min-height: 34px;
+  color: $tooltip-color;
+  background-color: $tooltip-bg;
+}
+
+.#{$tooltip-prefix}-left, 
+.#{$tooltip-prefix}-leftTop, 
+.#{$tooltip-prefix}-leftBottom{
+  & > .tooltip-arrow{
+    right: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-left-color: $tooltip-arrow-color;
+  }
+}
+.#{$tooltip-prefix}-left > .tooltip-arrow{
+  top: 50%;
+  margin-top: -$tooltip-arrow-width;
+}
+.#{$tooltip-prefix}-leftTop > .tooltip-arrow{
+  top: 15%;
+}
+.#{$tooltip-prefix}-leftBottom > .tooltip-arrow{
+  bottom: 15%;
+}
+
+.#{$tooltip-prefix}-right, 
+.#{$tooltip-prefix}-rightTop, 
+.#{$tooltip-prefix}-rightBottom{
+  & > .tooltip-arrow{
+    left: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-right-color: $tooltip-arrow-color;
+  }
+}
+.#{$tooltip-prefix}-right > .tooltip-arrow{
+  top: 50%;
+  margin-top: -$tooltip-arrow-width;
+}
+.#{$tooltip-prefix}-rightTop > .tooltip-arrow{
+  top: 15%;
+}
+.#{$tooltip-prefix}-rightBottom > .tooltip-arrow{
+  bottom: 15%;
+}
+
+.#{$tooltip-prefix}-top, 
+.#{$tooltip-prefix}-topLeft, 
+.#{$tooltip-prefix}-topRight{
+  & > .tooltip-arrow{
+    bottom: $tooltip-distance - $tooltip-arrow-width;
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-top-color: $tooltip-arrow-color;
+  }
+}
+.#{$tooltip-prefix}-top > .tooltip-arrow{
+  left: 50%;
+  margin-left: -$tooltip-arrow-width;
+}
+.#{$tooltip-prefix}-topLeft > .tooltip-arrow{
+  left: 15%;
+}
+.#{$tooltip-prefix}-topRight > .tooltip-arrow{
+  right: 15%;
+}
+
+.#{$tooltip-prefix}-bottom, 
+.#{$tooltip-prefix}-bottomLeft, 
+.#{$tooltip-prefix}-bottomRight{
+  & > .tooltip-arrow{
+    top: $tooltip-distance - $tooltip-arrow-width;
+    border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+    border-bottom-color: $tooltip-arrow-color;
+  }
+}
+.#{$tooltip-prefix}-bottom > .tooltip-arrow{
+  left: 50%;
+  margin-left: -$tooltip-arrow-width;
+}
+.#{$tooltip-prefix}-bottomLeft > .tooltip-arrow{
+  left: 15%;
+}
+.#{$tooltip-prefix}-bottomRight > .tooltip-arrow{
+  right: 15%;
+}

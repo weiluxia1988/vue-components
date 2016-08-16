@@ -1,0 +1,109 @@
+@import '../base';
+$collapse-prefix: v-collapse;
+.#{$collapse-prefix}-panel{
+  // position: relative;
+  // border-radius: 3px;
+  // background: #ffffff;
+  // // border: 1px solid transparent;
+  // border-top: 3px solid #d2d6de;
+  // margin-bottom: 5px;
+  // width: 100%;
+  // box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.#{$collapse-prefix}-panel-header{
+  // position: relative;
+  // color: #3c8dbc;
+  // display: block;
+  // padding: 10px;
+  // border-bottom: 1px solid #f4f4f4;
+  // cursor: pointer;
+}
+.#{$collapse-prefix}-panel-content{
+  // border-top-left-radius: 0;
+  // border-top-right-radius: 0;
+  // border-bottom-right-radius: 3px;
+  // border-bottom-left-radius: 3px;
+  // padding: 10px;
+}
+.panel-collapse{
+  overflow: hidden;
+}
+.collapse-active {
+  transition: height .3s ease-out;
+}
+/* 必需 */
+.v-collapse-panel-transition {
+  // transform-origin: 0 0;
+  // transform: translate(0, 0);
+  // transition: transform 1s ease;
+  // color: orange;
+  // overflow: hidden;
+
+  // height: 0;
+  // transition: height .3s ease-out;
+}
+
+/* .expand-enter 定义进入的开始状态 */
+/* .expand-leave 定义离开的结束状态 */
+.v-collapse-panel-enter{
+  // color: red;
+  // transform: translate(0, -100%);
+  // padding: 0;
+  // opacity: 0;
+  // animation: antSlideUpIn .2s ease;
+}
+.v-collapse-panel-leave{
+  // color: blue;
+  // transform: translate(0, -100%);
+  // padding: 0;
+  // animation: antSlideUpOut .2s ease;
+}
+
+@keyframes antSlideUpIn {
+  0% {
+    display: none;
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
+  }
+  100% {
+    display: block;
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+  }
+}
+@keyframes antSlideUpOut {
+  0% {
+    display: block;
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+  }
+  100% {
+    display: none;
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
+  }
+}
+@keyframes antSlideDownIn {
+  0% {
+    opacity: 0;
+    transform-origin: 100% 100%;
+    transform: scaleY(.8);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: scaleY(1);
+  }
+}
+@keyframes antSlideDownOut {
+  0% {
+    opacity: 1;
+    transform-origin: 100% 100%;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform-origin: 100% 100%;
+    transform: scaleY(.8);
+  }
+}

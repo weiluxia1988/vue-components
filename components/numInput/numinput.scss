@@ -1,0 +1,102 @@
+@import "../base";
+@import "./input";
+
+$numinput-prefix: v-numinput;
+
+.#{$numinput-prefix} {
+
+  @extend .input;
+
+  margin: 0;
+  padding: 0;
+  line-height: 28px;
+  font-size: 12px;
+  /*height: 28px;*/
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  /*width: 90px;*/
+
+  &:hover {
+    border-color: #66afe9;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  }
+
+  &-handler-wrap {
+    float: right;
+    border-left: 1px solid #d9d9d9;
+    width: 22px;
+    height: 28px;
+    position: relative;
+    opacity: 0;
+    transition: opacity .24s linear .1s;
+  }
+
+  &:hover &-handler-wrap {
+    opacity: 1;
+  }
+
+  &-handler {
+    text-align: center;
+    line-height: 0;
+    height: 14px;
+    overflow: hidden;
+    color: #999999;
+    position: relative;
+    transition: all .1s linear;
+    display: block;
+    width: 100%;
+
+    &:hover {
+      background: #fefefe;
+    }
+  }
+
+  &-handler-up {
+    cursor: pointer;
+    &:hover {
+      height: 16px;
+      margin-top: 2px;
+    }
+  }
+
+  &-handler-down {
+    cursor: pointer;
+    border-top: 1px solid #d9d9d9;
+    top: -1px;
+    &:hover {
+      height: 16px;
+      margin-top: -2px;
+    }
+  }
+
+  &-handler-up-inner, &-handler-down-inner {
+    line-height: 12px;
+    user-select: none;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    transition: all .1s linear;
+    right: 4px;
+    color: #999999;
+  }
+
+  &-input-wrap {
+    overflow: hidden;
+    height: 28px;
+  }
+
+  &-input {
+    width: 100%;
+    text-align: left;
+    outline: 0;
+    line-height: 28px;
+    height: 28px;
+    transition: all .3s linear;
+    color: #666666;
+    border: 0 none;
+    border-radius: 6px;
+    padding: 0 7px;
+  }
+}

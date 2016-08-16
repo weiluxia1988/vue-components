@@ -1,0 +1,39 @@
+@import '../base';
+$upload-prefix: v-upload;
+.#{$upload-prefix}-list{
+  position: relative;
+  margin-top: 10px;
+  margin-left: -10px;
+
+  &-item{
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 10px;
+    display: inline-block;
+
+    i{
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+    }
+  }
+  &-mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 140px;
+    width: 140px;
+    background-color: #000;
+    opacity: .5;
+
+    .v-progress-outer{
+      margin-top: 20px;
+    }
+  }
+}

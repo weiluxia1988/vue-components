@@ -1,0 +1,16 @@
+.edui-editor{
+  border: none!important;
+  border-bottom: 1px solid #eaeff9!important;
+}
+.edui-editor-toolbarboxouter {
+  background-image:none!important;
+  background-color: #ecf0f5!important;
+  box-shadow: none!important;
+  border-bottom: 1px solid #eaeff9!important;
+}
+.edui-editor-toolbarbox {
+  box-shadow: none!important;
+}
+.edui-default .edui-editor-toolbarboxinner {
+  padding: 10px 40px 10px 0 !important;
+}

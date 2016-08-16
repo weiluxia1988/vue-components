@@ -1,0 +1,17 @@
+@import '../base';
+$dropDown-prefix: v-dropDown;
+.#{$dropDown-prefix}{
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  z-index: 1050;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  [slot="content"]{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-color: #eee;
+    display: block !important;
+  }
+}

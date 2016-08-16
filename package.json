@@ -1,0 +1,63 @@
+{
+  "name": "05-five-vue",
+  "version": "1.0.0",
+  "description": "vue+webapck",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --inline"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.7",
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.1.18",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-runtime": "^6.9.2",
+    "cross-env": "^1.0.5",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "node-sass": "^3.8.0",
+    "postcss-loader": "^0.9.1",
+    "sass": "^0.5.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "stylus-loader": "^1.4.0",
+    "url-loader": "^0.5.7",
+    "vue": "^1.0.25",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^8.5.3",
+    "vue-resource": "^0.9.1",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "css-animation": "^1.3.0",
+    "dom-align": "^1.4.0",
+    "echarts": "^3.1.5",
+    "es6-promise": "^3.0.2",
+    "file-loader": "^0.8.5",
+    "firebase": "^2.3.1",
+    "is-number": "^2.1.0",
+    "isobject": "^2.1.0",
+    "jquery": "^2.2.3",
+    "jquery-ui": "^1.10.5",
+    "randomatic": "^1.1.5",
+    "repeat-string": "^1.5.4",
+    "style": "0.0.3",
+    "url-loader": "^0.5.7",
+    "velocity": "^0.7.2",
+    "velocity-animate": "^1.2.3",
+    "vue": "^1.0.8",
+    "vue-router": "^0.7.5"
+  },
+  "author": "guowenfh",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "webpack"
+  ]
+}

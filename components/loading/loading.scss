@@ -1,0 +1,60 @@
+@import '../base';
+$loading-prefix: v-loading;
+$smallSize: 20px;
+$defaultSize: 30px;
+$bigSize: 40px;
+@mixin size ($arg){
+  margin-top: -$arg/2;
+  height: $arg;
+  .#{$loading-prefix}-dot{
+    width: $arg;
+    height: $arg;
+  }
+}
+.#{$loading-prefix}{
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 100%;
+  @include size($defaultSize);
+  display: inline-block;
+  text-align: center;
+
+  &-dot{
+    position: relative;
+    display: inline-block;
+    &:after, &:before{
+      opacity: .5;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      content: '';
+      border-radius: 50%;
+      background-color: #2db7f5;
+      animation: pulse 1.8s infinite ease-in-out;
+    }
+    &:after{
+      animation-delay: -0.9s;
+    }
+  }
+
+  &-txt{
+    color: #2db7f5;
+  }
+}
+.#{$loading-prefix}-small{
+  @include size($smallSize);
+}
+.#{$loading-prefix}-big{
+  @include size($bigSize);
+}
+@keyframes pulse {
+  0%, to {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}

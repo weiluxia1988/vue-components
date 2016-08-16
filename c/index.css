@@ -1,0 +1,116 @@
+/*
+  本项目css
+  weiluxia 2016.7.18 
+*/
+
+/* 头部 
+------------------------------------------------------------*/
+.content-wrapper{
+  padding: 30px 20px;
+  min-height: 693px;
+}
+.content-header{
+  font-family: 'microsoft YaHei';
+  width: 80%;
+  display: inline-block;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+.content-header span{
+  display: inline-block;
+  width: 2px;
+  height: 31px;
+  position: relative;
+  top: 8px;
+  margin-right: 20px;
+  background-color: #3CBCBB;
+}
+
+
+/* 新闻列表 
+------------------------------------------------------------*/
+.newsList-content .box-body .btn{
+  padding: 2px 6px;
+  margin-right: 4px;
+}
+
+
+/*新闻分类
+---------------------------------------------------------------*/
+.newsType-content .toolbar{
+  margin-bottom: 20px;
+}
+.newsType-content .box-body .btn{
+  padding: 2px 10px;
+  margin-right: 4px;
+}
+
+
+/* 新闻发布 
+---------------------------------------------------------------*/
+.publish-content{
+  padding: 0 120px 0;
+}
+.publish-content .head{margin-bottom: 10px;}
+.publish-content .title{
+  position: relative;
+}
+.publish-content .form-group label {
+  height: 34px;
+  line-height: 34px;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0;
+  font-weight: bold;
+}
+.publish-content .title input{
+  font-size: 24px;
+  font-family: "Microsoft YaHei";
+  color: #333;
+  width: 100%;
+  border: none;
+  padding-right: 60px;
+  background: #ecf0f5;
+}
+.publish-content .word-count{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  color: #999999;
+}
+.publish-content .author{
+  margin-top: 35px;
+  position: relative;
+}
+.publish-content .author input{
+  font-family: "Microsoft YaHei";
+  color: #333;
+  width: 100%;
+  border: none;
+  padding-right: 60px;
+  background: #ecf0f5;
+}
+.publish-content input:focus{
+  outline:none;
+}
+.publish-content .tip{
+  line-height: 34px;
+  margin-left: 20px;
+  color: red;
+}
+.publish-content .btn-primary{
+  padding: 6px 30px;
+}
+
+.publish-content .switch{
+  height: 34px;
+  line-height: 34px;
+}
+
+

@@ -1,0 +1,24 @@
+$input-padding-vertical-base: 4px;
+$input-padding-horizontal: 7px;
+$input-height-base: 28px;
+$font-size-base: 12px;
+$line-height-base: 1.5;
+$input-color: #666666;
+$input-bg: #ffffff;
+$input-border-color: #d9d9d9;
+$border-radius-base: 6px;
+
+.input {
+  position: relative;
+  display: inline-block;
+  padding: $input-padding-vertical-base $input-padding-horizontal;
+  width: 100%;
+  /*height: $input-height-base;*/
+  cursor: text;
+  font-size: $font-size-base;
+  /*line-height: $line-height-base;*/
+  color: $input-color;
+  background-color: $input-bg;
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius-base;
+}

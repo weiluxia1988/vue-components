@@ -1,0 +1,60 @@
+@import '../base';
+$switch-prefix: v-switch;
+.#{$switch-prefix}{
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 44px;
+  height: 22px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 20px 20px;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  cursor: pointer;
+
+  transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  user-select: none;
+
+  &:after {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 2px;
+    top: 1px;
+    border-radius: 18px;
+    background-color: #fff;
+    content: " ";
+    cursor: pointer;
+    transition: left .3s cubic-bezier(.78,.14,.15,.86), width .3s cubic-bezier(.78,.14,.15,.86);
+  }
+
+  &-inner {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    left: 24px;
+  }
+}
+.#{$switch-prefix}-disabled{
+  cursor: no-drop;
+  background: #f4f4f4;
+  border-color: #f4f4f4;
+
+  &:after {
+    background: #ccc;
+    cursor: no-drop;
+  }
+}
+.#{$switch-prefix}-checked {
+  border: 1px solid #2db7f5;
+  background-color: #2db7f5;
+
+  &:after {
+    left: 22px;
+  }
+
+  .#{$switch-prefix}-inner{
+    left: 6px;
+  }
+}

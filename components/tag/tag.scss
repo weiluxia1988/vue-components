@@ -1,0 +1,8 @@
+@import '../base';
+$tag-prefix: v-tag;
+.#{$tag-prefix}{
+  margin-right: 10px;
+  .fa{
+  	cursor: pointer;
+  }
+}
