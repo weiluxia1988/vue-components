@@ -8,6 +8,7 @@ $checkbox-prefix: v-checkbox;
   cursor: pointer;
   vertical-align: middle;
   white-space: nowrap;
+  margin-bottom: 0;
 }
 .#{$checkbox-prefix} {
   position: relative;

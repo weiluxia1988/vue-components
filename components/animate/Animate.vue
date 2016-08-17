@@ -26,6 +26,10 @@ export default{
       type: Boolean,
       default: false
     },
+    duration: {
+      type: Number,
+      default: 400
+    },
     transitionName: {
       type: String,
       default: 'fade'
@@ -45,12 +49,12 @@ export default{
   },
   methods: {
     enter () {
-      animation.enter(this.currentNode, oTransitionName[this.transitionName].enter, () => {
+      animation.enter(this.currentNode, this.duration, oTransitionName[this.transitionName].enter, () => {
         this.onEnter()
       });
     },
     leave () {
-      animation.leave(this.currentNode, oTransitionName[this.transitionName].leave, () => {
+      animation.leave(this.currentNode, this.duration, oTransitionName[this.transitionName].leave, () => {
         this.onLeave();
       });
     }
@@ -70,7 +74,7 @@ export default{
     if (!this.show) {
       this.currentNode.style.display = 'none';
     } else {
-      this.enter();
+      this.currentNode.style.display = 'block';
     }
   }
 }

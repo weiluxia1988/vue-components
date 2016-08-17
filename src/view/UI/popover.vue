@@ -4,11 +4,12 @@
     <section>
       <h3>演示</h3>
       <div style="text-align:center">
-        <v-popover show="true" :on-visible-change="change" content='And heres some amazing conten' title="标题" placement="leftTop">
-          <v-button type="default">click-左上</v-button>
+        <v-popover disabled :on-visible-change="change" content='And heres some amazing conten' title="标题" placement="leftTop">
+          <v-button type="default">click-disabled-左上</v-button>
         </v-popover>
-        <v-popover :on-visible-change="change" content='And heres some amazing conten' title="标题" placement="left" trigger="hover">
-          <v-button type="default">hover-左边</v-button>
+        <v-popover show="true"  :on-visible-change="change" content='And heres some amazing conten' title="标题" placement="left" trigger="hover">
+          <a href="http://www.baiud.com">hover-左边</a>
+          <!-- <v-button type="default">hover-左边</v-button> -->
         </v-popover>
         <v-popover content='And heres some amazing conten' title="标题" placement="leftBottom">
           <input type="text" value="foucs-左下">
@@ -92,6 +93,12 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td>disabled</td>
+                <td>是否禁用</td>
+                <td>boolean</td>
+                <td>false</td>
+              </tr>
               <tr>
                 <td>trigger</td>
                 <td>触发行为，可选 hover/focus/click</td>

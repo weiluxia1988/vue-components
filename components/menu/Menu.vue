@@ -62,8 +62,7 @@
     data () {
       let self = this;
       return {
-        toolName: 'menu',
-        version: '0.0.1'
+        toolName: 'menu'
       }
     },
     computed: {

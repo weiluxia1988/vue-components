@@ -38,7 +38,7 @@
           },
           {
             "name": "Basic",
-            "icon": "fa-table",
+            "icon": "fa-th",
             "isHref": false,
             "url": "",
             "children": [
@@ -105,13 +105,7 @@
                 "url": "/Form/checkbox"
               },
               {
-                "name": "下拉选择",
-                "icon": "fa-circle-o",
-                "isHref": false,
-                "url": "/Form/select"
-              },
-              {
-                "name": "级联选择",
+                "name": "select选择",
                 "icon": "fa-circle-o",
                 "isHref": false,
                 "url": "/Form/select"
@@ -131,16 +125,10 @@
             "url": "",
             "children": [
               {
-                "name": "表格1",
+                "name": "表格",
                 "icon": "fa-circle-o",
                 "isHref": false,
-                "url": "/table/table1"
-              },
-              {
-                "name": "表格2",
-                "icon": "fa-circle-o",
-                "isHref": false,
-                "url": "/table/table2"
+                "url": "/table/table"
               }
             ]
           },
@@ -244,7 +232,7 @@
           },
           {
             "name": "导航",
-            "icon": "fa-laptop",
+            "icon": "fa-dashboard",
             "isHref": false,
             "url": "",
             "children": [
@@ -276,7 +264,7 @@
           },
           {
             "name": "图形",
-            "icon": "fa-laptop",
+            "icon": "fa-pie-chart",
             "isHref": false,
             "url": "",
             "children": []
@@ -379,6 +367,30 @@
         banner: 'http://img1.qpdiy.com/uploads/materials/images/201606/223703cf600715559cbf46583d55cac5.jpg'
       };
     }
+
+    if(url.indexOf('/testajax') > -1) {
+      message = 'select ajax ok';
+      console.log(params.test);
+      if(params.test=='9999'){
+        data={
+          items: [
+            {id: "1",text: "大树路9999"},
+            {id: "2",text: "大树路9999"}
+          ]
+        }
+      }else{
+        data={
+          items: [
+            {id: "3",text: "大树路1"},
+            {id: "4",text: "大树路3"},
+            {id: "5",text: "大树路4"},
+            {id: "6",text: "大树路2"},
+            {id: "7",text: "大树路1"}
+          ]
+        }
+      }
+    }
+
 
     console.log('$.ajax', url, options, {code: 0, message: message, data:data});
     setTimeout(function() {

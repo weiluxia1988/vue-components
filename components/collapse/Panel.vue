@@ -5,7 +5,7 @@
         <a href="javascript:;">{{{ header }}}</a>
       </h4>
     </div>
-    <Animate 
+    <v-Animate 
       :show="isActive" 
       transition-name="slide" 
       :on-enter="onEnter" 
@@ -16,7 +16,7 @@
           <slot></slot>
         </div>
       </div>
-    </Animate>
+    </v-Animate>
   </div>
 </template>
 <script>
@@ -29,10 +29,9 @@
   };
 
   import './collapse.scss';
-  import Animate from '../animate';
-  import anim from 'css-animation';
+  import vAnimate from '../animate';
   export default {
-    components: { Animate },
+    components: { vAnimate },
     props: {
       header: {
         type: String,

@@ -1,8 +1,8 @@
 import velocity from 'velocity-animate'
-
-function animate (node, show, transitionName, done) {
+const defaultDuration = 400;
+function animate (node, show, duration, transitionName, done) {
   let ok
-
+  
   function complete () {
     if (!ok) {
       ok = true;
@@ -11,12 +11,13 @@ function animate (node, show, transitionName, done) {
   }
 
   // Fix safari flash bug
-  node.style.display = show ? 'block' : 'none'
+  node.style.display = show ? 'block' : 'none';
   velocity(node, transitionName, {
-    duration: 1000,
+    duration: duration,
     complete: complete,
     easing: 'easeInOutQuad'
   });
+
   return {
     stop () {
       velocity(node, 'finish');
@@ -26,11 +27,11 @@ function animate (node, show, transitionName, done) {
 }
 
 const animation = {
-  enter (node, transitionName, done) {
-    return animate(node, false, transitionName, done)
+  enter (node, duration = defaultDuration, transitionName, done) {
+    return animate(node, false, duration, transitionName, done);
   },
-  leave (node, transitionName, done) {
-    return animate(node, true, transitionName, done)
+  leave (node, duration = defaultDuration, transitionName, done) {
+    return animate(node, true, duration, transitionName, done);
   }
 }
 

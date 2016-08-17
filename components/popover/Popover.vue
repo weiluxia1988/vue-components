@@ -8,7 +8,7 @@
   onVisibleChange 显示隐藏回调
 -->
 <template>
-  <v-trigger prefix-cls="v-popover" :show="show" :placement="placement" :trigger="trigger" :on-visible-change="onVisibleChange">
+  <v-trigger prefix-cls="v-popover" :disabled="disabled" :show="show" :placement="placement" :trigger="trigger" :on-visible-change="onVisibleChange">
     <div slot="popup" class="v-popover popover" role="popover">
       <div class="arrow"></div>
       <h3 class="popover-title" v-if="title">{{{title}}}</h3>
@@ -48,6 +48,11 @@
         default: 'top'
       },
       show: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
+      disabled: {
         type: Boolean,
         coerce: Util.coerceBoolean,
         default: false

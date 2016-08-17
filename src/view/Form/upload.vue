@@ -120,9 +120,9 @@
       return {
         oFile: {
           name: 'file',
-          listType: 'image',
+          listType: 'text',
           action: './',
-          accept: 'image',
+          accept: 'text',
           maxSize: 20000, // K为单位
           fileList: [
             {

@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     iconClasses () {
-      return className + ' fa-' + type;
+      return this.className + ' fa-' + this.type;
     }
   }
 }

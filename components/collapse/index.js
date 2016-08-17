@@ -1,6 +1,6 @@
-import Collapse from './Collapse.vue'
-import Panel from './Panel.vue'
+import vCollapse from './Collapse.vue'
+import vPanel from './Panel.vue'
 
-Collapse.Panel = Panel;
+vCollapse.vPanel = vPanel;
 
-export default Collapse;
+export default vCollapse;

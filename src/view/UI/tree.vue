@@ -4,11 +4,19 @@
     <p>文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用树控件可以完整展现其中的层级关系，并具有展开收起选择等交互功能。</p>
     <section>
       <h3>演示</h3>
-      <v-tree></v-tree>
+      <v-tree>
+        <v-tree-item title="1-1" key="1-1">
+          <v-tree-item title="1-1-1" key="1-1-1"></v-tree-item>
+          <v-tree-item title="1-1-1" key="1-1-1"></v-tree-item>
+          <v-tree-item title="1-1-1" key="1-1-1"></v-tree-item>
+        </v-tree-item>
+        <v-tree-item title="1-2" key="1-2"></v-tree-item>
+      </v-tree>
     </section>
     <section>
       <h3>使用</h3>
       <div class="box">
+        <div class="box-header">TreeItem</div>
         <div class="box-body">
           <table class="table table-bordered table-hover dataTable">
             <thead>
@@ -21,9 +29,27 @@
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>disabled</td>
+                <td>禁掉响应</td>
+                <td>Boolean</td>
+                <td>false</td>
+              </tr>
+              <tr>
+                <td>disableCheckbox</td>
+                <td>禁掉 checkbox</td>
+                <td>Boolean</td>
+                <td>false</td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>标题</td>
+                <td>String</td>
+                <td>/</td>
+              </tr>
+              <tr>
+                <td>key</td>
+                <td>唯一标识。注意：整个树范围内的所有节点的 key 值不能重复！</td>
+                <td>String</td>
                 <td>/</td>
               </tr>
             </tbody>
@@ -41,7 +67,8 @@
 </style>
 <script>
   import vTree from "../../../components/tree";
+  const vTreeItem = vTree.vTreeItem;
   export default{
-    components: { vTree }
+    components: { vTree, vTreeItem }
   }
 </script>

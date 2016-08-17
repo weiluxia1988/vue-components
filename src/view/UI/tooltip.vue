@@ -4,7 +4,7 @@
     <section>
       <h3>演示</h3>
       <div style="text-align:center">
-        <v-tooltip title="标题标题标题" placement="leftTop">
+        <v-tooltip disabled title="标题标题标题" placement="leftTop">
           <v-button type="default">点我-左上</v-button>
         </v-tooltip>
         <v-tooltip title="标题标题标题" placement="left">
@@ -56,6 +56,12 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td>disabled</td>
+                <td>是否禁用</td>
+                <td>boolean</td>
+                <td>false</td>
+              </tr>
               <tr>
                 <td>title</td>
                 <td>提示内容</td>

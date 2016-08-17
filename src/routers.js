@@ -10,9 +10,10 @@ import upload from './view/Form/upload.vue';
 import radio from './view/Form/radio.vue';
 import checkbox from './view/Form/checkbox.vue';
 import numInput from './view/Form/numInput.vue';
+import select from './view/Form/select.vue';
 
-import table1 from './view/Table/table1.vue';
-import table2 from './view/Table/table2.vue';
+
+import table from './view/Table/table.vue';
 
 import progress from './view/UI/progress.vue';
 import loading from './view/UI/loading.vue';
@@ -72,13 +73,12 @@ export default function(router) {
     '/Form/numInput':{
       component: numInput // 数字输入框
     },
-
-
-    '/table/table1': {
-      component: table1 // table1
+    '/Form/select':{
+      component: select // select下拉选择
     },
-    '/table/table2': {
-      component: table2 // table2
+
+    '/table/table': {
+      component: table // table1
     },
 
 

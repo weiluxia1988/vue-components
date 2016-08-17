@@ -1,12 +1,13 @@
 <!--
   弹出框
+  weiluxia 20160815
   placement 方向
   show 是否显示
   title 标题
   onVisibleChange 显示隐藏回调
 -->
 <template>
-  <v-trigger prefix-cls="v-tooltip" :show="show" :placement="placement" :trigger="trigger" :on-visible-change="onVisibleChange">
+  <v-trigger prefix-cls="v-tooltip" :disabled="disabled" :show="show" :placement="placement" :trigger="trigger" :on-visible-change="onVisibleChange">
     <div slot="popup" class="v-tooltip tooltip" role="tooltip">
       <div class="tooltip-arrow"></div>
       <div class="tooltip-inner">
@@ -40,6 +41,11 @@
         default: 'top'
       },
       show: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
+      disabled: {
         type: Boolean,
         coerce: Util.coerceBoolean,
         default: false

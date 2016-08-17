@@ -12,6 +12,7 @@
                                 :disabled="item.disabled"
                                 :type="item.type"
                                 :text="item.text"
+                                :value = "item.value"
                         ></v-radio>
                     </div>
                 </div>
@@ -82,6 +83,12 @@
                             <td>String</td>
                             <td>默认第一种</td>
                         </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>当前选项的key值</td>
+                            <td>String</td>
+                            <td>/</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -101,41 +108,50 @@
                     checked: true,
                     disabled: true,
                     type: 'green',
-                    text: '初始选中且禁用'
+                    text: '初始选中且禁用',
+                    value:'test'
                 }, {
                     checked: false,
                     disabled: false,
-                    text: '初始未选中且未禁用'
+                    text: '初始未选中且未禁用',
+                    value:'test'
                 }, {
                     checked: true,
                     disabled: false,
-                    text: '初始选中且未禁用'
+                    text: '初始选中且未禁用',
+                    value:'test'
                 }, {
                     checked: false,
                     disabled: true,
-                    text: '初始未选中且禁用'
+                    text: '初始未选中且禁用',
+                    value:'test'
                 }],
                 group1: [
                     {
                         checked: true,
                         disabled: false,
-                        text: '苹果'
+                        text: '苹果',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
-                        text: '桃子'
+                        text: '桃子',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
-                        text: '桃子2'
+                        text: '桃子2',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
-                        text: '橘子'
+                        text: '橘子',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
-                        text: '香蕉'
+                        text: '香蕉',
+                        value:'test'
                     }
                 ],
                 group2: [
@@ -143,22 +159,26 @@
                         checked: true,
                         disabled: false,
                         text: '苹果',
-                        type: 'blue'
+                        type: 'blue',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '桃子',
-                        type: 'blue'
+                        type: 'blue',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '橘子',
-                        type: 'blue'
+                        type: 'blue',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '香蕉',
-                        type: 'blue'
+                        type: 'blue',
+                        value:'test'
                     }
                 ],
                 group3: [
@@ -166,22 +186,26 @@
                         checked: true,
                         disabled: false,
                         text: '苹果',
-                        type: 'green'
+                        type: 'green',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '桃子',
-                        type: 'green'
+                        type: 'green',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '橘子',
-                        type: 'green'
+                        type: 'green',
+                        value:'test'
                     }, {
                         checked: false,
                         disabled: false,
                         text: '香蕉',
-                        type: 'green'
+                        type: 'green',
+                        value:'test'
                     }
                 ]
             }

@@ -40,6 +40,11 @@
         coerce: Util.coerceBoolean,
         default: false
       },
+      disabled: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
       onVisibleChange: {
         type: Function,
         default () {
@@ -114,28 +119,28 @@
         return false
       },
       _onBlur () {
-        if(!this.isFocusAction()) return;
+        if(!this.isFocusAction() || this.disabled) return;
         this.setPopupVisible(false);
       },
       _onFocus () {
-        if(!this.isFocusAction()) return;
+        if(!this.isFocusAction() || this.disabled) return;
         this.insertPopup();
         this.setPopupVisible(true);
       },
       _onClick () {
+        if(!this.isClickAction() || this.disabled) return;
         event.preventDefault();
         event.stopPropagation();
-        if(!this.isClickAction()) return;
         this.insertPopup();
         this.setPopupVisible(!this.show);
       },
       _onMouseEnter () {
-        if(!this.isHoverAction()) return;
+        if(!this.isHoverAction() || this.disabled) return;
         this.insertPopup();
         this.delaySetPopupVisible(true, mouseEnterDelay);
       },
       _onMouseLeave () {
-        if(!this.isHoverAction()) return;
+        if(!this.isHoverAction() || this.disabled) return;
         this.delaySetPopupVisible(false, mouseLeaveDelay);
       },
       delaySetPopupVisible (visible, delayS) {

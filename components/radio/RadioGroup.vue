@@ -7,6 +7,7 @@
       :type="item.type"
       :text = "item.text"
       :index = '$index'
+      :value = "item.value"
       ></v-radio>
   </div>
 </template>

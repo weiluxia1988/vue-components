@@ -181,7 +181,7 @@
 </style>
 <script>
   import vCollapse from "../../../components/collapse";
-  const vPanel = vCollapse.Panel;
+  const vPanel = vCollapse.vPanel;
   export default {
     components: { vCollapse, vPanel },
     methods: {
