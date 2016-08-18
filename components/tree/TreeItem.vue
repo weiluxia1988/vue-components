@@ -3,7 +3,7 @@
     <span class="v-tree-switcher" :class="switchClassName" @click="toggle">
       <v-icon v-if="isFolder" type="sort-desc"></v-icon>
     </span>
-    <span class="v-tree-checkbox"><v-checkbox :disabled="disableCheckbox" :checked.sync="isSelected"></v-checkbox></span>
+    <span class="v-tree-checkbox"><v-checkbox :on-change="selectHandle" :disabled="disableCheckbox" :checked="isSelected"></v-checkbox></span>
     <a href="javascript:;" class="v-tree-title">{{{ title }}}</a>
     <template v-if="isFolder">
       <v-Animate 
@@ -65,25 +65,40 @@
       }
     },
     methods: {
+      // 展开收起列表
       toggle () {
         this.isOpened = !this.isOpened;
-      }
-    },
-    watch: {
-      isSelected (newValue) {
-        const $children = this.$el.querySelectorAll('[role="v-tree-item"]');
+      },
+      // 设置父组件
+      setParentActive () {
+        const self = this;
+        const $children = this.$parent.$el.querySelectorAll('[role="v-tree-item"]');
+        let isSelected = true;
         [...$children].forEach(($child, index) => {
           const vChild = $child.__vue__;
-          console.log(vChild)
-          vChild.isSelected = newValue;
+          isSelected = vChild.isSelected && isSelected;
         });
-        
-        // this.$parent.isSelected = false;
+        this.$parent.isSelected = isSelected;
+      },
+      // 设置子组件
+      setChildActive (flag) {
+        const $children = this.curChildren;
+        [...$children].forEach(($child, index) => {
+          const vChild = $child.__vue__;
+          vChild.isSelected = flag;
+        });
+      },
+      // 是否选中checkbox
+      selectHandle (flag) {
+        this.isSelected = flag;
+        this.setParentActive();
+        this.setChildActive(flag);
       }
     },
     ready () {
       const self = this;
       const $children = self.$el.querySelectorAll('[role="v-tree-item"]');
+      self.curChildren = $children;
       if($children.length) {
         self.isFolder = true;
       } else{

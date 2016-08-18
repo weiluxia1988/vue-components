@@ -16,10 +16,11 @@
 <script>
   import './checkbox.scss';
   export default {
-    props:['checked','disabled','type','text','value'],
+    props:['checked','disabled','type','text','value', 'onChange'],
     methods:{
       checkboxF: function(){
         this.checked = !this.checked;
+        this.onChange && this.onChange(this.checked);
       }
     }
   }
