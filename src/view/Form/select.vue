@@ -88,7 +88,7 @@
                         </pre>
                     </div>
                     <div class="col-md-12">
-                        具体应用（结合change回调改变data参数，监测data参数变化重绘select）
+                        具体应用,联级选择（结合change回调改变data参数，监测data参数变化重绘select）
                     </div>
                     <div class="col-md-12" style="margin:10px 0px">
                         <div class="col-md-4">

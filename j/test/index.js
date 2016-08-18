@@ -115,6 +115,12 @@
                 "icon": "fa-circle-o",
                 "isHref": false,
                 "url": "/Form/numInput"
+              },
+              {
+                "name": "表单验证",
+                "icon": "fa-circle-o",
+                "isHref": false,
+                "url": "/Form/validator"
               }
             ]
           },

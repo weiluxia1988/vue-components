@@ -11,6 +11,7 @@ import radio from './view/Form/radio.vue';
 import checkbox from './view/Form/checkbox.vue';
 import numInput from './view/Form/numInput.vue';
 import select from './view/Form/select.vue';
+import validator from './view/Form/validator.vue';
 
 
 import table from './view/Table/table.vue';
@@ -76,6 +77,10 @@ export default function(router) {
     '/Form/select':{
       component: select // select下拉选择
     },
+    '/Form/validator':{
+      component: validator // 表单验证
+    },
+
 
     '/table/table': {
       component: table // table1
