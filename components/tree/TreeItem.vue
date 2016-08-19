@@ -1,13 +1,13 @@
 <template>
-  <li :class="liClassName" role="v-tree-item">
-    <span class="v-tree-switcher" :class="switchClassName" @click="toggle">
+  <li :class="liClassName" role="tree-item">
+    <span class="v-tree-switcher" :class="switchClassName" @click="expandHandle">
       <v-icon v-if="isFolder" type="sort-desc"></v-icon>
     </span>
-    <span class="v-tree-checkbox"><v-checkbox :on-change="selectHandle" :disabled="disableCheckbox" :checked="isSelected"></v-checkbox></span>
-    <a href="javascript:;" class="v-tree-title">{{{ title }}}</a>
+    <span class="v-tree-checkbox" v-if="checkable"><v-checkbox :on-change="checkHandle" :disabled="_disableCheckbox" :checked="isChecked"></v-checkbox></span>
+    <a href="javascript:;" @click="selectHandle" class="v-tree-title">{{{ title }}}</a>
     <template v-if="isFolder">
       <v-Animate 
-        :show="isOpened" 
+        :show="isExpanded" 
         transition-name="slide"
       >
         <ul class="v-tree-child-tree" :class="treeChildClassName">
@@ -26,12 +26,12 @@
   export default {
     components: { vIcon, vCheckbox, vAnimate },
     props: {
-      disabled: {
+      disabled: { // 禁掉响应
         type: Boolean,
         coerce: Util.coerceBoolean,
         default: false
       },
-      disableCheckbox: {
+      disableCheckbox: { // 禁掉checkbox
         type: Boolean,
         coerce: Util.coerceBoolean,
         default: false
@@ -43,67 +43,128 @@
       title: {
         type: String,
         default: ''
+      },
+      multiple: { // 是否支持多选
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: true
+      },
+      checkable: { // 是否支持选中
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
+      isExpanded: { // 是否展开树节点
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
+      isChecked: { // checkbox是否选中
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: true
+      },
+      isFolder: { // 是否父节点
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: true
+      },
+      onItemClick: {
+        type: Function,
+        default () {
+          return new Function();
+        }
+      },
+      onItemCheck: {
+        type: Function,
+        default () {
+          return new Function();
+        }
+      },
+      onItemExpand: {
+        type: Function,
+        default () {
+          return new Function();
+        }
       }
     },
     data () {
       return {
-        toolName: 'treeItem',
-        isOpened: true, // 孩子树是否打开
-        isSelected: false, // checkbox是否选中
-        isFolder: true // 是否含有孩子树
+        toolName: 'treeItem'
       }
     },
     computed: {
       liClassName () {
-        return this.disabled ? 'v-tree-treeitem-disabled' : '';
+        return this.disabled ? 'v-tree-item-disabled' : '';
       },
       switchClassName () {
-        return this.isOpened ? 'v-tree-switcher-open' : 'v-tree-switcher-close';
+        return this.isExpanded ? 'v-tree-switcher-open' : 'v-tree-switcher-close';
       },
       treeChildClassName () {
-        return this.isOpened ? 'v-tree-child-tree-open' : 'v-tree-child-tree-close';
+        return this.isExpanded ? 'v-tree-child-tree-open' : 'v-tree-child-tree-close';
+      },
+      _disableCheckbox () {
+        return !(!this.disableCheckbox && !this.disabled);
       }
     },
     methods: {
       // 展开收起列表
-      toggle () {
-        this.isOpened = !this.isOpened;
+      expandHandle () {
+        if(this.disabled) return;
+        this.isExpanded = !this.isExpanded;
+        this.onItemExpand();
       },
-      // 设置父组件
-      setParentActive () {
-        const self = this;
-        const $children = this.$parent.$el.querySelectorAll('[role="v-tree-item"]');
-        let isSelected = true;
-        [...$children].forEach(($child, index) => {
-          const vChild = $child.__vue__;
-          isSelected = vChild.isSelected && isSelected;
-        });
-        this.$parent.isSelected = isSelected;
-      },
-      // 设置子组件
-      setChildActive (flag) {
-        const $children = this.curChildren;
-        [...$children].forEach(($child, index) => {
-          const vChild = $child.__vue__;
-          vChild.isSelected = flag;
-        });
+      // 点击树节点
+      selectHandle () {
+        this.onItemClick();
       },
       // 是否选中checkbox
-      selectHandle (flag) {
-        this.isSelected = flag;
-        this.setParentActive();
-        this.setChildActive(flag);
+      checkHandle (flag) {
+        this.isChecked = flag;
+        this.setParentChecked();
+        this.setChildChecked(flag);
+        this.onItemCheck();
+      },
+      // 设置父组件
+      setParentChecked () {
+        let $parent = this.$parent;
+        while ('treeItem' === $parent.toolName) {
+          const $children = $parent.$children;
+          const $newChildren = this.getTreeItem($children);
+          let isChecked = true;
+          $newChildren.forEach(($child, index) => {
+            isChecked = $child.isChecked && isChecked;
+          });
+          $parent.isChecked = isChecked;
+          $parent = $parent.$parent;
+        }
+      },
+      // 设置子组件
+      setChildChecked (flag) {
+        function getArray(arr){
+          const $newChildren = self.getTreeItem(arr);
+          $newChildren.forEach(($child, index) => {
+            $child.isChecked = flag;
+            $child.$children && getArray($child.$children);
+          });
+        }
+        let self = this;
+        let $children = this.$children;
+        getArray($children);
+      },
+      // 获得树组件
+      getTreeItem (arr) {
+        return arr.filter((one, index) => {
+          return 'treeItem' === one.toolName;
+        });
+      },
+      // 检查是否含有子树
+      checkFolder (obj) {
+        return this.getTreeItem(obj.$children).length;
       }
     },
     ready () {
-      const self = this;
-      const $children = self.$el.querySelectorAll('[role="v-tree-item"]');
-      self.curChildren = $children;
-      if($children.length) {
-        self.isFolder = true;
-      } else{
-        self.isFolder = false;
-      }
+      this.isFolder = this.checkFolder(this);
     }
   }
 </script>

@@ -60,3 +60,14 @@ $tree-prefix: v-tree;
     display: block;
   }
 }
+
+.#{$tree-prefix}-item-disabled{
+  & > .#{$tree-prefix}-title{
+    color: #ccc;
+    cursor: not-allowed;
+  }
+
+  & > .#{$tree-prefix}-switcher{
+    cursor: not-allowed;
+  }
+}

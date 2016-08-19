@@ -2,7 +2,7 @@
   <slot></slot>
 </template>
 <script type="text/javascript">
-import animation from '../base/openAnimation';
+import animation from './openAnimation';
 function getTrustSlotNode (node) {
   let childNode = node.nextSibling;
   if (childNode.nodeType !== 1) {

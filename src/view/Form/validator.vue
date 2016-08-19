@@ -53,7 +53,7 @@
                         <button type="submit" v-if="$validation1.valid" class="btn btn-success"> 提交</button>
                     </form>
                 </validator>
-                <h4>自动移表单验证</h4>
+                <h4>自定义表单验证</h4>
                 <validator name="validation2">
                     <form class="form-horizontal" novalidate>
                         <div class="form-group" v-validate-class>
@@ -94,8 +94,8 @@
                                         <input type="radio" v-validate:fruits name="fruits" :classes="styleRadio" /> 单选2
                                     </label>
                                 </p>
-                                <p v-for="msg in $validation3.fruits.errors" class="help-block">
-                                    {{msg.message}}
+                                <p v-for="error in $validation3.errors" class="help-block">
+                                    {{error.message}}
                                 </p>
                             </div>
                         </div>
@@ -133,8 +133,8 @@
                                         <input type="checkbox" v-validate:fruits value="e" :classes="styleCheckbox" /> 复选2
                                     </label>
                                 </p>
-                                <p v-for="msg in $validation4.fruits.errors" class="help-block">
-                                    {{msg.message}}
+                                <p v-for="error in $validation4.errors" class="help-block">
+                                    {{error.message}}
                                 </p>
                             </div>
                         </div>
@@ -148,15 +148,14 @@
                             <label for="address" class="col-sm-2 control-label">下拉列表:</label>
                             <div class="checkbox col-sm-10">
                                 <select v-validate:lang="selectconfig" class="form-control" :classes="styleSelect">
-                                    <option value="">----- select your favorite programming language -----</option>
-                                    <option value="javascript">JavaScript</option>
+                                    <option value="">--- 请选择 ---</option>
+                                    <option value="javascript">JavaScript是世界上最好的语言</option>
                                     <option value="ruby">Ruby</option>
                                     <option value="python">Python</option>
                                     <option value="perl">Perl</option>
                                     <option value="lua">Lua</option>
                                     <option value="go">Go</option>
-                                    <option value="rust">Rust</option>
-                                    <option value="elixir">Elixir</option>
+                                    <option value="PHP">PHP</option>
                                     <option value="c">C</option>
                                     <option value="none">Not a nothing here</option>
                                 </select>

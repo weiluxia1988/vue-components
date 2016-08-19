@@ -1,5 +1,5 @@
 <template>
-  <div class="v-collapse panel-group">
+  <div class="v-collapse panel-group" role="collapse">
     <slot></slot>
   </div>
 </template>
@@ -23,19 +23,19 @@
     },
     methods: {
       getActivityKey () {
-        let activeKey = this.activeKey
-        const accordion = this.accordion
+        let activeKey = this.activeKey;
+        const accordion = this.accordion;
         if(accordion && Array.isArray(activeKey)) {
-          activeKey = activeKey[0]
+          activeKey = activeKey[0];
         }
 
         if(!accordion && !Array.isArray(activeKey)) {
-          activeKey = activeKey ? [activeKey] : []
+          activeKey = activeKey ? [activeKey] : [];
         }
-        return activeKey
+        return activeKey;
       },
       setChildActive () {
-        const self = this
+        const self = this;
         const activeKey = self.getActivityKey();
         const $children = this.$el.querySelectorAll('[role="panel"]');
         [...$children].forEach(($child, index) => {
