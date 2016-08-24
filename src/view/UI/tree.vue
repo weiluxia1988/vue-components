@@ -172,6 +172,11 @@
       return {
         expandedKeys1: ['1-1-2']
       }
+    },
+    ready () {
+      const foo = {};
+      foo.prop = 123;
+      console.log(foo);
     }
   }
 </script>

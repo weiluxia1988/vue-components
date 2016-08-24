@@ -151,6 +151,12 @@
                 "url": "/UI/progress"
               },
               {
+                "name": "确认弹框confirm",
+                "icon": "fa-circle-o",
+                "isHref": false,
+                "url": "/UI/confirm"
+              },
+              {
                 "name": "对话框modal",
                 "icon": "fa-circle-o",
                 "isHref": false,
@@ -185,6 +191,12 @@
                 "icon": "fa-circle-o",
                 "isHref": false,
                 "url": "/UI/tooltip"
+              },
+              {
+                "name": "气泡确认框popconfirm",
+                "icon": "fa-circle-o",
+                "isHref": false,
+                "url": "/UI/popconfirm"
               },
               {
                 "name": "加载中",

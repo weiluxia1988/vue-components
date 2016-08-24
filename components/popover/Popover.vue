@@ -8,28 +8,23 @@
   onVisibleChange 显示隐藏回调
 -->
 <template>
-  <v-trigger prefix-cls="v-popover" :disabled="disabled" :show="show" :placement="placement" :trigger="trigger" :on-visible-change="onVisibleChange">
-    <div slot="popup" class="v-popover popover" role="popover">
-      <div class="arrow"></div>
-      <h3 class="popover-title" v-if="title">{{{title}}}</h3>
-      <div class="popover-content">
-        <template v-if="content">
-          {{{ content }}}
-        </template>  
-        <template v-else>
-          <slot name="content"></slot>
-        </template>
-      </div>
+  <v-popover :disabled="disabled" :show.sync="show" :trigger="trigger" :placement="placement" :on-visible-change="onVisibleChange" :title="title">
+    <div slot="content">
+      <template v-if="content">
+        {{{ content }}}
+      </template>  
+      <template v-else>
+        <slot name="content"></slot>
+      </template>
     </div>
-    <span slot="trigger"><slot></slot></span>
-  </v-trigger>
+    <slot></slot>
+  </v-popover>
 </template>
 <script>
-  import './popover.scss';
   import * as Util from "../Util"; 
-  import vTrigger from '../base/trigger';
+  import vPopover from '../base/popover';
   export default{
-    components: { vTrigger },
+    components: { vPopover },
     props: {
       title: {
         type: String,

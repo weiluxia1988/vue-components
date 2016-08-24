@@ -27,6 +27,8 @@ import alert from './view/UI/alert.vue';
 import popover from './view/UI/popover.vue';
 import tooltip from './view/UI/tooltip.vue';
 import message from './view/UI/message.vue';
+import confirm from './view/UI/confirm.vue';
+import popconfirm from './view/UI/popconfirm.vue';
 import affix from './view/UI/affix.vue';
 import tag from './view/UI/tag.vue';
 import tree from './view/UI/tree.vue';
@@ -93,6 +95,9 @@ export default function(router) {
     '/UI/loading': {
       component: loading // 加载中
     },
+    '/UI/confirm': {
+      component: confirm // 确认弹窗
+    },
     '/UI/modal': {
       component: modal // 弹窗
     },
@@ -107,6 +112,9 @@ export default function(router) {
     },
     '/UI/tooltip': {
       component: tooltip // 工具提示
+    },
+    '/UI/popconfirm': {
+      component: popconfirm // 气泡通知框
     },
     '/UI/message': {
       component: message // 通知提醒框

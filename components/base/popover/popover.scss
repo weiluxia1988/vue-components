@@ -1,0 +1,113 @@
+@import '../../base';
+$popover-prefix: v-popover;
+.#{$popover-prefix}-left, .#{$popover-prefix}-leftTop, .#{$popover-prefix}-leftBottom{
+  & > .arrow{
+    right: -11px;
+    margin-top: -11px;
+    border-right-width: 0;
+    border-left-color: rgba(0,0,0,.25);
+    &:after{
+      right: 1px;
+      bottom: -10px;
+      content: " ";
+      border-right-width: 0;
+      border-left-color: #fff;
+    }
+  }
+}
+.#{$popover-prefix}-left > .arrow{
+  top: 50%;
+}
+.#{$popover-prefix}-leftTop > .arrow{
+  top: 12px;
+}
+.#{$popover-prefix}-leftBottom > .arrow{
+  bottom: 12px;
+}
+
+.#{$popover-prefix}-right, .#{$popover-prefix}-rightTop, .#{$popover-prefix}-rightBottom{
+  & > .arrow{
+    left: -11px;
+    margin-top: -11px;
+    border-left-width: 0;
+    border-right-color: rgba(0,0,0,.25);
+    &:after{
+      bottom: -10px;
+      left: 1px;
+      content: " ";
+      border-right-color: #fff;
+      border-left-width: 0;
+    }
+  }
+}
+.#{$popover-prefix}-right > .arrow{
+  top: 50%;
+}
+.#{$popover-prefix}-rightTop > .arrow{
+  top: 12px;
+}
+.#{$popover-prefix}-rightBottom > .arrow{
+  bottom: 12px;
+}
+
+.#{$popover-prefix}-top, .#{$popover-prefix}-topLeft, .#{$popover-prefix}-topRight{
+  & > .arrow{
+    bottom: -11px;
+    margin-left: -11px;
+    border-bottom-width: 0;
+    border-top-color: rgba(0,0,0,.25);
+    &:after{
+      bottom: 1px;
+      margin-left: -10px;
+      content: " ";
+      border-top-color: #fff;
+      border-bottom-width: 0;
+    }
+  }
+}
+.#{$popover-prefix}-top > .arrow{
+  left: 50%;
+}
+.#{$popover-prefix}-topLeft > .arrow{
+  left: 12px;
+}
+.#{$popover-prefix}-topRight > .arrow{
+  right: 12px;
+}
+
+.#{$popover-prefix}-bottom, .#{$popover-prefix}-bottomLeft, .#{$popover-prefix}-bottomRight{
+  & > .arrow{
+    top: -11px;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: rgba(0,0,0,.25);
+    &:after{
+      top: 1px;
+      margin-left: -10px;
+      content: " ";
+      border-top-width: 0;
+      border-bottom-color: #fff;
+    }
+  }
+}
+.#{$popover-prefix}-bottom > .arrow{
+  left: 50%;
+}
+.#{$popover-prefix}-bottomLeft > .arrow{
+  left: 12px;
+}
+.#{$popover-prefix}-bottomRight > .arrow{
+  right: 12px;
+}
+
+.#{$popover-prefix}{
+  .popover-message{
+    padding: 8px 0 16px;
+    font-size: 12px;
+    color: #666;
+  }
+  .popover-buttons{
+    text-align: right;
+    margin-bottom: 8px;
+  }
+}
