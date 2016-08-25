@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import vProgress from '../progress/Progress.vue';
+import vProgress from '../progress';
 export default {
   props: {
     list: {

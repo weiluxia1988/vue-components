@@ -143,7 +143,7 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
+  import vButton from "../../../components/button";
   import vPopover from "../../../components/popover";
 
   export default{

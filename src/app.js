@@ -5,13 +5,7 @@ import app from './App.vue';
 
 Vue.config.debug = true;
 
-var vue = new Vue();
-
-// 日期转换
-Vue.filter('dateFormat', function (value, fmt) {
-  return new Date(value * 1000).Format(fmt);
-});
-
+var vue = new Vue(); 
 Vue.use(Router);
 var router = new Router({
 	linkActiveClass: 'active'

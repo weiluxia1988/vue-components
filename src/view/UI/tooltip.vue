@@ -88,7 +88,7 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
+  import vButton from "../../../components/button";
   import vTooltip from "../../../components/tooltip";
 
   export default{

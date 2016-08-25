@@ -119,7 +119,7 @@
   </article>   
 </template>
 <script>
-  import vDatePicker from "../../../components/datePicker/DatePicker.vue";
+  import vDatePicker from "../../../components/datePicker";
 
   // 时间
   const dateRange = [

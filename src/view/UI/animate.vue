@@ -110,7 +110,7 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
+  import vButton from "../../../components/button";
   import vAnimate from '../../../components/animate';
   export default{
     components: { vButton, vAnimate },

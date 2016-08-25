@@ -110,8 +110,8 @@
 </template>
 <script>
   import './table.scss';
-  import vPagination from "../pagination/Pagination.vue";
-  import vLoading from "../loading/Loading.vue";
+  import vPagination from "../pagination";
+  import vLoading from "../loading";
   export default{
     props: {
       'dataSource': {

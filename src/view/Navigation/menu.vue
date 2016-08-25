@@ -267,7 +267,7 @@
   }
 </style>
 <script>
-  import vSwitch from "../../../components/switch/Switch.vue";
+  import vSwitch from "../../../components/switch";
   import vMenu from "../../../components/menu";
   const vMenuItem = vMenu.MenuItem;
   const vSubMenu = vMenu.SubMenu;

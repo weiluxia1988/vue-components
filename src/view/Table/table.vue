@@ -60,8 +60,8 @@
 </template>
 <script>
   import * as Util from "../../Util";
-  import vTable from "../../../components/table/Table.vue";
-  import vDatePicker from "../../../components/datePicker/DatePicker.vue";
+  import { vTable } from "../../../components/table";
+  import vDatePicker from "../../../components/datePicker";
 
   // 列表头
   const columns = [

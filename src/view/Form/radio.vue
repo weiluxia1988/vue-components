@@ -97,8 +97,7 @@
     </article>
 </template>
 <script>
-    import vRadio from '../../../components/radio/Radio.vue';
-    import vRadioGroup from '../../../components/radio/RadioGroup.vue';
+    import { vRadio, vRadioGroup } from '../../../components/radio';
     export default{
         components: {vRadio, vRadioGroup},
         data () {

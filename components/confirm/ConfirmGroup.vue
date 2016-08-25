@@ -1,30 +1,31 @@
 <template>
-  <div class="v-alertGroup">
+  <div class="v-confirmGroup">
     <template v-for="item in list">
-      <v-alert
+      <v-confirm
         :show.sync="item.show"
         :type="item.type"
-        :show-icon="item.showIcon"
-        :closable="item.closable"
         :title="item.title"
         :content="item.content"
-        :on-close="item.onClose"
-      ></v-alert>
+        :ok-text="item.okText"
+        :cancel-text="item.cancelText"
+        :on-confirm="item.onConfirm"
+        :on-cancel="item.onCancel"
+      ></v-confirm>
     </template>
   </div>
 </template>
 <script>
-  import './alert.scss';
-  import vAlert from './Alert.vue';
+  import './confirm.scss';
+  import vConfirm from './Confirm.vue';
 
   let seed = 0
   const now = Date.now()
   function getUid () {
-    return 'alertGroup_' + now + '_' + (seed++);
+    return 'confirmGroup_' + now + '_' + (seed++);
   }
 
   export default{
-    components: { vAlert },
+    components: { vConfirm },
     props: {
     },
     data () {
@@ -37,19 +38,23 @@
         const self = this
         const key = one.key = one.key || getUid();
         const list = this.list;
-
         if (!list.filter(v => v.key === key).length) {
           // 合并对象(Object.assign)
           let _one = Object.assign({
             show: true,
-            closable: true,
-            showIcon: false,
             type: 'info',
             title: '',
-            content: ''
+            content: '',
+            okText: '',
+            cancelText: ''
           }, one);
-          _one.onClose = function() {
-            one.onClose && one.onClose();
+          _one.onConfirm = function() {
+            one.onConfirm && one.onConfirm();
+            self._close(_one);
+            self._remove(_one.key);
+          }
+          _one.onCancel = function() {
+            one.onCancel && one.onCancel();
             self._close(_one);
             self._remove(_one.key);
           }

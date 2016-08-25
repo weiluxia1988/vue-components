@@ -1,4 +1,4 @@
-@import '../../base';
+@import '../../style/base';
 $popover-prefix: v-popover;
 .#{$popover-prefix}-left, .#{$popover-prefix}-leftTop, .#{$popover-prefix}-leftBottom{
   & > .arrow{

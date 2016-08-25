@@ -72,7 +72,7 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
+  import vButton from "../../../components/button";
   import message from "../../../components/message";
 
   let s;

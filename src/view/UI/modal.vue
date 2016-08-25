@@ -96,8 +96,8 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
-  import vModal from "../../../components/modal/Modal.vue";
+  import vButton from "../../../components/button";
+  import vModal from "../../../components/modal";
 
   export default{
     components: { vButton, vModal },

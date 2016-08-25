@@ -77,8 +77,8 @@
 </template>
 <script>
   import './table.scss';
-  import vPagination from "../pagination/Pagination.vue";
-  import vLoading from "../loading/Loading.vue";
+  import vPagination from "../pagination";
+  import vLoading from "../loading";
   import * as Util from "../Util"; 
   export default{
     props: {

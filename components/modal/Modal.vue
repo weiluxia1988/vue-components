@@ -28,7 +28,7 @@
         <slot></slot>
       </div>
       <div class="modal-footer">
-        <v-button type="default" class-name="pull-left"
+        <v-button type="default"
           @click="closeHandle">
           {{cancelText}}
         </v-button>
@@ -42,30 +42,24 @@
 </div>
 </template>
 <script>
-  import vButton from '../button/Button.vue';
+  import * as Util from "../Util";
+  import vButton from '../button';
   export default{
     components: { vButton },
     props: {
       show: {
         type: Boolean,
-        coerce: function(val) {
-          if(typeof val !== "string") {
-            return val;
-          } else if(val === "true") {
-            return true;
-          } else if(val === "false") {
-            return false;
-          } else if(val === "null") {
-            return false;
-          } else if(val === "undefined") {
-            return false;
-          } 
-        },
+        coerce: Util.coerceBoolean,
         default: true
       },
       confirmLoading: {
         type: Boolean,
+        coerce: Util.coerceBoolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: ''
       },
       title: {
         type: String,
@@ -73,6 +67,7 @@
       },
       width: {
         type: Number,
+        coerce: Util.coerceNumber,
         default: 520
       },
       cancelText: {

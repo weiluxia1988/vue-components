@@ -107,7 +107,7 @@
   </article>
 </template>
 <script>
-  import vCheckbox from '../../../components/checkbox/Checkbox.vue';
+  import vCheckbox from '../../../components/checkbox';
   export default{
     components: { vCheckbox},
     data () {

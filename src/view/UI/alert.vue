@@ -68,7 +68,7 @@
   }
 </style>
 <script>
-  import vButton from "../../../components/button/Button.vue";
+  import vButton from "../../../components/button";
   import alert from "../../../components/alert";
 
   let s;

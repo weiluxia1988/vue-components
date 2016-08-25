@@ -111,7 +111,7 @@
   }
 </style>
 <script>
-  import vUpload from "../../../components/upload/Upload.vue";
+  import vUpload from "../../../components/upload";
 
   export default{
     components: { vUpload },

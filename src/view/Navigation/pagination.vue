@@ -69,7 +69,7 @@
   }
 </style>
 <script>
-  import vPagination from "../../../components/pagination/Pagination.vue";
+  import vPagination from "../../../components/pagination";
 
   export default{
     components: { vPagination },

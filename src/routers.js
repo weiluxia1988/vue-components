@@ -3,7 +3,6 @@ import start from './view/start.vue';
 
 import button from './view/Base/button.vue';
 
-import form1 from './view/Form/form1.vue';
 import _switch from './view/Form/switch.vue';
 import datepicker from './view/Form/datepicker.vue';
 import upload from './view/Form/upload.vue';
@@ -55,9 +54,6 @@ export default function(router) {
     },
 
 
-    '/Form/form': {
-      component: form1 // form
-    },
     '/Form/radio':{
       component:radio//单选
     },

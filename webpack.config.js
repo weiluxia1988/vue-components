@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var publicPath = '/build/';
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ExtractLess = new ExtractTextPlugin('./style/components.css');
+var ExtractLess = new ExtractTextPlugin('./style/sdj-vue-components.css');
 module.exports = {
   entry: {
     "app": "./src/app.js"

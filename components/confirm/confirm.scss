@@ -1,0 +1,9 @@
+@import '../style/base';
+$confirm-prefix: v-confirm;
+.#{$confirm-prefix}Group{
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  font-size: 12px;
+  width: 100%;
+}

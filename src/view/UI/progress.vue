@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import vProgress from '../../../components/progress/Progress.vue';
+  import vProgress from '../../../components/progress';
 
   export default{
     components: { vProgress },

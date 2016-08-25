@@ -65,7 +65,7 @@
   }
 </style>
 <script>
-  import vLoading from "../../../components/loading/Loading.vue";
+  import vLoading from "../../../components/loading";
 
   export default{
     components: { vLoading },

@@ -218,7 +218,7 @@
     </article>
 </template>
 <script>
-    import vSelect from '../../../components/select/select.vue';
+    import vSelect from '../../../components/select';
     export default{
         components: {vSelect},
         data () {
