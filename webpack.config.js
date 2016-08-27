@@ -1,12 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
-var publicPath = '/build/';
+var publicPath = '/';
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ExtractLess = new ExtractTextPlugin('./style/sdj-vue-components.css');
+var ExtractLess = new ExtractTextPlugin('./dist/components.css');
 module.exports = {
   entry: {
-    "app": "./src/app.js"
+    "build/app": "./src/app.js"
   },
   output: {
     path: __dirname + publicPath,

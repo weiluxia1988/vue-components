@@ -69,12 +69,6 @@
             "url": "",
             "children": [
               {
-                "name": "表单",
-                "icon": "fa-circle-o",
-                "isHref": false,
-                "url": "/Form/form"
-              },
-              {
                 "name": "开关",
                 "icon": "fa-circle-o",
                 "isHref": false,
@@ -144,6 +138,18 @@
             "isHref": false,
             "url": "",
             "children": [
+              {
+                "name": "动画",
+                "icon": "fa-circle-o",
+                "isHref": false,
+                "url": "/UI/animate"
+              },
+              {
+                "name": "拖拽",
+                "icon": "fa-circle-o",
+                "isHref": false,
+                "url": "/UI/draggable"
+              },
               {
                 "name": "进度条",
                 "icon": "fa-circle-o",
@@ -215,12 +221,6 @@
                 "icon": "fa-circle-o",
                 "isHref": false,
                 "url": "/UI/collapse"
-              },
-              {
-                "name": "动画",
-                "icon": "fa-circle-o",
-                "isHref": false,
-                "url": "/UI/animate"
               },
               {
                 "name": "固钉Affix",

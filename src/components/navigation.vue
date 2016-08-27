@@ -27,8 +27,9 @@
       <v-menu
         theme="dark"
         mode="inline"
+        :menus="menus"
       > 
-        <template v-for="item in menus">
+        <!-- <template v-for="item in menus">
           <template v-if="0 == item.children.length">
             <v-menu-item :key="item.url">
               <a v-if="item.isHref" :href="item.url">{{{item.title}}}</a>
@@ -61,7 +62,7 @@
               </template>
             </v-sub-menu>
           </template>
-        </template>
+        </template> -->
       </v-menu>
     </section>
   </aside>

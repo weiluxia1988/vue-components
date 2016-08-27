@@ -1,7 +1,6 @@
 <!--
   时间选择器
   weiluxia 2016.07.20
-
 -->
 <template>
     <div class="form-group col-md-7 padding-none">
@@ -20,7 +19,11 @@
     </div>
 </template>
 <script>
-  // import daterangepicker from
+  import $ from 'jquery';
+  import moment from 'moment';
+  import 'bootstrap-daterangepicker/daterangepicker.scss';
+  import 'bootstrap-daterangepicker';
+
   export default{
     props: {
       ranges: {
@@ -141,15 +144,17 @@
         options.maxDate = self.maxDate;
       }
 
-      $(this.$els.reservationtime).daterangepicker(options);
 
-      $(this.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {
+
+      $(self.$els.reservationtime).daterangepicker(options);
+
+      $(self.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {
         self.startTime = picker.startDate.format(self.format);
         self.endTime = picker.endDate.format(self.format);
         self.onChange(self.startTime, self.endTime);
       });
 
-      $(this.$els.reservationtime).on('cancel.daterangepicker', function(ev, picker) {
+      $(self.$els.reservationtime).on('cancel.daterangepicker', function(ev, picker) {
         self.startTime = '';
         self.endTime = '';
         self.onChange();

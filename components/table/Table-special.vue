@@ -110,6 +110,8 @@
 </template>
 <script>
   import './table.scss';
+  import $ from "jquery";
+  import "jquery-ui";
   import vPagination from "../pagination";
   import vLoading from "../loading";
   export default{
