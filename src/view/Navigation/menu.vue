@@ -268,11 +268,9 @@
 </style>
 <script>
   import vSwitch from "../../../components/switch";
-  import vMenu from "../../../components/menu";
-  const vMenuItem = vMenu.MenuItem;
-  const vSubMenu = vMenu.SubMenu;
+  import { vMenu, vSubMenu, vMenuItem } from "../../../components/menu";
   export default{
-    components: { vSwitch, vMenu, vMenuItem, vSubMenu },
+    components: { vSwitch, vMenu, vSubMenu, vMenuItem },
     data () {
       let self = this;
       return {
