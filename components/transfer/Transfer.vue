@@ -23,15 +23,10 @@
       </div>
       <div class="v-transfer-list-body" :class="showSearch ? 'v-transfer-list-body-with-search' : ''">
         <div v-if="showSearch" class="v-transfer-list-body-search-wrapper">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="{{searchPlaceholder}}">
-            <span class="input-group-btn">
-              <button type="submit" name="seach" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-            </span>
-          </div>
+          <v-search :placeholder="searchPlaceholder" input="true" :on-change="searchSourceHandle"></v-search>
         </div>
-        <ul v-if="sourceList.length">
-          <li v-for="item in sourceList" v-bind:title="item|renderTitle">
+        <ul v-if="sourceList.length" v-el:source>
+          <li v-for="item in sourceList" v-bind:title="item|renderTitle" >
             <v-checkbox
             :text = "item|renderTitle"
             :checked = "item.isChecked"
@@ -39,14 +34,14 @@
             ></v-checkbox>
           </li>
         </ul>
-        <p v-else>{{ notFoundContent }}</p>
+        <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
       </div>
     </div>
     <div class="v-transfer-operation">
-      <button type="button" class="btn btn-default btn-sm" disabled="{{selectTargetList.length == 0}}" @click="toSourceHandle">
+      <button type="button" class="btn btn-sm" disabled="{{selectTargetList.length == 0}}" @click="toSourceHandle" :class="selectTargetList.length == 0 ? 'btn-default': 'btn-primary'">
         <span><i class="fa fa-angle-left"></i></span>
       </button>
-      <button type="button" class="btn btn-default btn-sm" disabled="{{selectSourceList.length == 0}}" @click="toTargetHandle">
+      <button type="button" class="btn btn-sm" disabled="{{selectSourceList.length == 0}}" @click="toTargetHandle" :class="selectSourceList.length == 0 ? 'btn-default': 'btn-primary'">
         <span><i class="fa fa-angle-right"></i></span>
       </button>
     </div>
@@ -59,9 +54,12 @@
         ></v-checkbox>
         <span class="v-transfer-list-header-title">{{ titles[1] }}</span>
       </div>
-      <div class="v-transfer-list-body">
-        <ul v-if="targetList.length">
-          <li v-for="item in targetList">
+      <div class="v-transfer-list-body" :class="showSearch ? 'v-transfer-list-body-with-search' : ''">
+        <div v-if="showSearch" class="v-transfer-list-body-search-wrapper">
+          <v-search :placeholder="searchPlaceholder" input="true" :on-change="searchTargetHandle"></v-search>
+        </div>
+        <ul v-if="targetList.length" v-el:target>
+          <li v-for="item in targetList" >
             <v-checkbox
             :text = "item|renderTitle"
             :checked = "item.isChecked"
@@ -69,7 +67,7 @@
             ></v-checkbox>
           </li>
         </ul>
-        <p v-else>{{ notFoundContent }}</p>
+        <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
       </div>
     </div>
   </div>
@@ -78,8 +76,9 @@
   import './transfer.scss';
   import * as Util from "../Util";
   import vCheckbox from '../checkbox';
+  import vSearch from '../base/search';
   export default{
-    components: { vCheckbox },
+    components: { vCheckbox, vSearch },
     props: {
       rowKey: {
         type: String,
@@ -200,18 +199,22 @@
       // 加入到源数组 
       toSourceHandle () {
         this.selectTargetList.forEach(item => {
+          item.isChecked = false;
           this.targetKeys.$remove(item[this.rowKey]);
         });
         this.selectTargetList = [];
+        this.$els.source.scrollTop = 0;
       },
       // 加入到目标数组
       toTargetHandle () {
         let arr = [];
         this.selectSourceList.forEach(item => {
+          item.isChecked = false;
           arr.push(item[this.rowKey]);
         });
-        this.targetKeys = this.targetKeys.concat(arr);
+        this.targetKeys = arr.concat(this.targetKeys);
         this.selectSourceList = [];
+        this.$els.target.scrollTop = 0;
       },
       // 源数组-全选
       selectAllSourceHandle (flag) {
@@ -260,6 +263,14 @@
         } else{
           this.selectSourceList.$remove(one);
         }
+      },
+      // 源数组-搜索
+      searchSourceHandle (con) {
+        console.log(con)
+      },
+      // 目标数组-搜索
+      searchTargetHandle (con) {
+        console.log(con)
       }
     }
   }

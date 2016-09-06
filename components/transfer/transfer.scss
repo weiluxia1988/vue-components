@@ -22,6 +22,13 @@ $transfer-prefix: v-transfer;
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  // .transfer-highlight-transition{
+
+  // }
+  // .transfer-highlight-enter{
+  //   background-color: #eaf8fe;
+  // }
 }
 .#{$transfer-prefix}-list-header{
   padding: 7px 16px;
@@ -57,6 +64,12 @@ $transfer-prefix: v-transfer;
     background-color: #eaf8fe;
   }
 }
+.#{$transfer-prefix}-list-body-not-found{
+  padding-top: 24px;
+  color: #ccc;
+  text-align: center;
+  height: 100%;
+}
 .#{$transfer-prefix}-list-body-with-search{
   padding-top: 34px;
 }
@@ -67,6 +80,23 @@ $transfer-prefix: v-transfer;
   height: 28px;
   padding: 4px;
   width: 100%;
+  .form-control{
+    height: 28px;
+    font-size: 12px;
+    padding-right: 24px;
+    border-radius: 6px;
+  }
+  .input-group-btn{
+    position: absolute;
+    right: 24px;
+    top: 2px;
+    z-index: 2;
+  }
+  .btn{
+    background-color: #fff;
+    padding: 2px 4px;
+    border: none;
+  }
 }
 .#{$transfer-prefix}-operation{
   display: inline-block;

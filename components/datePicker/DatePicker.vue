@@ -143,12 +143,6 @@
         options.maxDate = self.maxDate;
       }
 
-<<<<<<< HEAD
-      console.log($(self.$els.reservationtime).daterangepicker(options));
-=======
->>>>>>> 80a31360aa2a6d9c1c399415e5301bf98dbb1433
-
-
       $(self.$els.reservationtime).daterangepicker(options);
 
       $(self.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {

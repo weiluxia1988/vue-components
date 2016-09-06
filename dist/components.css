@@ -2220,6 +2220,81 @@ span.v-radio + * {
 /* 兼容 */
 @charset "UTF-8";
 /* 兼容 */
+.v-transfer {
+  position: relative;
+  line-height: 1.5; }
+
+.v-transfer-list {
+  background: #fff;
+  font-size: 12px;
+  color: #666;
+  border: 1px solid #d9d9d9;
+  display: inline-block;
+  border-radius: 6px;
+  vertical-align: middle;
+  position: relative;
+  width: 160px;
+  height: 200px;
+  padding-top: 33px; }
+  .v-transfer-list .checkbox {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0; }
+
+.v-transfer-list-header {
+  padding: 7px 16px;
+  border-bottom: 1px solid #e9e9e9;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; }
+
+.v-transfer-list-header-title {
+  float: right; }
+
+.v-transfer-list-body {
+  position: relative;
+  height: 100%; }
+  .v-transfer-list-body ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    height: 100%;
+    overflow: auto; }
+  .v-transfer-list-body li {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 7px 16px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease; }
+  .v-transfer-list-body li:hover {
+    cursor: pointer;
+    background-color: #eaf8fe; }
+
+.v-transfer-list-body-with-search {
+  padding-top: 34px; }
+
+.v-transfer-list-body-search-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 28px;
+  padding: 4px;
+  width: 100%; }
+
+.v-transfer-operation {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  margin: 0 8px; }
+  .v-transfer-operation .btn {
+    float: left;
+    clear: both; }
+  .v-transfer-operation .btn:first-child {
+    margin-bottom: 4px; }
+@charset "UTF-8";
+/* 兼容 */
 .v-menu {
   outline: none;
   padding-left: 0;
