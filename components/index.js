@@ -19,14 +19,15 @@ import vPagination from './pagination';
 import vPopconfirm from './popconfirm';
 import vPopover from './popover';
 import vProgress from './progress';
-import vRadio from './radio';
+import { vRadio, vRadioGroup } from './radio';
 import vSelect from './select';
 import vTab from './tab';
-import vTable from './table';
+import { vTable, vTableSpecial } from './table';
 import vTag from './tag';
 import vTooltip from './tooltip';
 import vTree from './tree';
 import vUpload from './upload';
+
 export {
   vAffix,
   vAlert,
@@ -49,9 +50,11 @@ export {
   vPopconfirm,
   vPopover,
   vRadio,
+  vRadioGroup,
   vSelect,
   vTab,
   vTable,
+  vTableSpecial,
   vTag,
   vTooltip,
   vTree,

@@ -51,6 +51,7 @@
   };
 
   import * as Util from "../Util";
+  import $ from 'jquery';
   import vMenuItem from "./MenuItem.vue";
   export default{
     components: { vMenuItem },
