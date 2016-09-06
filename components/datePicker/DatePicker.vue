@@ -19,18 +19,10 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-  import 'bootstrap-daterangepicker/daterangepicker.scss';
-  import $ from 'jquery';
-  import moment from 'moment';
-  var DateRangePicker = require('bootstrap-daterangepicker');
-=======
   import $ from 'jquery';
   import moment from 'moment';
   import 'bootstrap-daterangepicker/daterangepicker.scss';
   import 'bootstrap-daterangepicker';
-
->>>>>>> 80a31360aa2a6d9c1c399415e5301bf98dbb1433
   export default{
     props: {
       ranges: {
