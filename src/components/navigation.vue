@@ -27,6 +27,7 @@
       <v-menu
         theme="dark"
         mode="inline"
+        :menus="menus"
       > 
         <template v-for="item in menus">
           <template v-if="0 == item.children.length">
@@ -72,9 +73,7 @@
   }
 </style>
 <script>
-  import vMenu from "../../components/menu";
-  const vMenuItem = vMenu.MenuItem;
-  const vSubMenu = vMenu.SubMenu;
+  import {vMenu, vSubMenu, vMenuItem} from "../../components/menu";
   export default {
     components: { vMenu, vMenuItem, vSubMenu },
     props: ['baseInfo'],

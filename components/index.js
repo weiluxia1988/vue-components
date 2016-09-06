@@ -10,7 +10,7 @@ import vDatePicker from './datePicker';
 import vDropDown from './dropDown';
 import vIcon from './icon';
 import vLoading from './loading';
-import vMenu from './menu';
+import {vMenu, vSubMenu, vMenuItem} from './menu';
 import vMessage from './message';
 import vModal from './modal';
 import vNotify from './notify';
@@ -21,11 +21,13 @@ import vPopover from './popover';
 import vProgress from './progress';
 import { vRadio, vRadioGroup } from './radio';
 import vSelect from './select';
+import vSwitch from './switch';
 import vTab from './tab';
 import { vTable, vTableSpecial } from './table';
 import vTag from './tag';
 import vTooltip from './tooltip';
 import vTree from './tree';
+import vTransfer from './transfer';
 import vUpload from './upload';
 
 export {
@@ -42,6 +44,8 @@ export {
   vIcon,
   vLoading,
   vMenu,
+  vSubMenu,
+  vMenuItem,
   vMessage,
   vModal,
   vNotify,
@@ -52,11 +56,13 @@ export {
   vRadio,
   vRadioGroup,
   vSelect,
+  vSwitch,
   vTab,
   vTable,
   vTableSpecial,
   vTag,
   vTooltip,
   vTree,
+  vTransfer,
   vUpload
 };

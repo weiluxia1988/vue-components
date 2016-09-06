@@ -19,10 +19,18 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
   import 'bootstrap-daterangepicker/daterangepicker.scss';
   import $ from 'jquery';
   import moment from 'moment';
   var DateRangePicker = require('bootstrap-daterangepicker');
+=======
+  import $ from 'jquery';
+  import moment from 'moment';
+  import 'bootstrap-daterangepicker/daterangepicker.scss';
+  import 'bootstrap-daterangepicker';
+
+>>>>>>> 80a31360aa2a6d9c1c399415e5301bf98dbb1433
   export default{
     props: {
       ranges: {
@@ -143,15 +151,21 @@
         options.maxDate = self.maxDate;
       }
 
+<<<<<<< HEAD
       console.log($(self.$els.reservationtime).daterangepicker(options));
+=======
+>>>>>>> 80a31360aa2a6d9c1c399415e5301bf98dbb1433
 
-      $(this.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {
+
+      $(self.$els.reservationtime).daterangepicker(options);
+
+      $(self.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {
         self.startTime = picker.startDate.format(self.format);
         self.endTime = picker.endDate.format(self.format);
         self.onChange(self.startTime, self.endTime);
       });
 
-      $(this.$els.reservationtime).on('cancel.daterangepicker', function(ev, picker) {
+      $(self.$els.reservationtime).on('cancel.daterangepicker', function(ev, picker) {
         self.startTime = '';
         self.endTime = '';
         self.onChange();
