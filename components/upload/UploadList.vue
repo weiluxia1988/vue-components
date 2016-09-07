@@ -1,16 +1,21 @@
 <template>
 <div class="v-upload-list" :class="className">
-  <div class="v-upload-list-item" v-for="item in list">
-    <div class="v-upload-list-mask" v-if="item.status=='uploading'">
+  <div class="v-upload-list-item" :class="item.status == 'uploading' ? 'v-upload-list-item-loading': ''" v-for="item in list">
+    <div class="v-upload-list-item-info">
+      <a v-if="'image' == listType" class="v-upload-list-item-thumbnail" :href="item.url" target="_blank">
+        <img :src="item.url" alt="xxx.png">
+      </a>
+      <i v-else class="fa fa-paperclip"></i>
+      <a :href="item.url" target="_blank" class="v-upload-list-item-name">{{item.name}}</a>
+      <i class="fa fa-times" @click="closeHandle(item)"></i>
+    </div>
+    <div class="v-upload-list-item-progress">
       <v-progress 
       :show-info="showInfo" 
       :percent="item.percent" 
       :stroke-width="strokeWidth"
       :bg-color="bgColor">
-      </v-progress>
     </div>
-    <img width="140px" height="140px" border="1px solid #fff" :src="item.url">
-    <i class="fa fa-times" @click="closeHandle(item)"></i>
   </div>
 </div>
 </template>

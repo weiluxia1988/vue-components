@@ -72,7 +72,7 @@ export default function upload (option) {
       formData.append(key, option.data[key]);
     });
   }
-  xhr.open('post', option.action, true);
+  xhr.open('get', option.action, true);
   // xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
   xhr.send(formData);
 }

@@ -3,7 +3,7 @@
     <h1>上传文件Upload</h1>
     <section>
       <h3>演示</h3>
-      <div style="border-bottom: 1px solid #7b6e6e;">
+      <div style="padding-bottom:10px;">
         <p>图片上传</p>
         <v-upload 
           :name="oFile1.name"
@@ -21,7 +21,7 @@
         </v-upload>
       </div>
 
-      <div style="border-bottom: 1px solid #7b6e6e;">
+      <div style="padding-bottom:10px;">
         <p>文件上传</p>
         <v-upload 
           :name="oFile2.name"
