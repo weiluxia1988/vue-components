@@ -39,14 +39,18 @@
     watch: {
       message (val) {
         this.isDel = !!this.message.length;
+        console.log(this.input)
         if(this.input) this.onChange(val);
       }
     },
     methods: {
-      deleteHandle: function() {
+      refresh () {
         this.message = '';
       },
-      searchHandle: function() {
+      deleteHandle () {
+        this.message = '';
+      },
+      searchHandle () {
         this.onChange(this.message);
       }
     }

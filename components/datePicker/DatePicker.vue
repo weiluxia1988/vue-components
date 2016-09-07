@@ -3,26 +3,27 @@
   weiluxia 2016.07.20
 -->
 <template>
-  <div class="form-group col-md-7 padding-none">
-    <label class="control-label">时间：</label>
-    <div class="col-md-4 padding-none btn-group" v-if="ranges.length">
-      <button type="button" class="btn btn-info" v-for="item in ranges" v-if="$index < 3" @click="selectHandle(item)">{{ item.title }}</button>
-    </div>
-    <div class="col-sm-6 input-group">
-      <div class="input-group-addon">
-        <i class="fa fa-calendar"></i>
+    <div class="form-group col-md-7 padding-none">
+      <label class="control-label">时间：</label>
+      <div class="col-md-4 padding-none btn-group" v-if="ranges.length">
+        <button type="button" class="btn btn-info" v-for="item in ranges" v-if="$index < 3" @click="selectHandle(item)">{{ item.title }}</button>
       </div>
-      <input type="hidden" value="{{ startTime }}" name="{{keyStartName}}">
-      <input type="hidden" value="{{ endTime }}" name="{{keyEndName}}">
-      <input v-el:reservationtime type="text" :value="time" class="form-control pull-right" placeholder="{{placeholder}}">
+      <div class="col-sm-6 input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <input type="hidden" value="{{ startTime }}" name="{{keyStartName}}">
+        <input type="hidden" value="{{ endTime }}" name="{{keyEndName}}">
+        <input v-el:reservationtime type="text" :value="time" class="form-control pull-right" placeholder="{{placeholder}}">
+      </div>
     </div>
-  </div>
 </template>
 <script>
   import $ from 'jquery';
   import moment from 'moment';
   import 'bootstrap-daterangepicker/daterangepicker.scss';
   import 'bootstrap-daterangepicker';
+
   export default{
     props: {
       ranges: {
@@ -142,6 +143,8 @@
       if("" != self.maxDate) {
         options.maxDate = self.maxDate;
       }
+
+
 
       $(self.$els.reservationtime).daterangepicker(options);
 

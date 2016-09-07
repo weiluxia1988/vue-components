@@ -3,19 +3,41 @@
     <h1>上传文件Upload</h1>
     <section>
       <h3>演示</h3>
-      <v-upload 
-        :name="oFile.name"
-        :action="oFile.action"
-        :max-size="oFile.maxSize"
-        :data="oFile.data"
-        :accept="oFile.accept"
-        :multiple="oFile.multiple"
-        :file-list="oFile.fileList"
-        :before-upload="oFile.beforeUpload"
-        :on-change="oFile.onChange"
-        :on-remove="oFile.onRemove">
-        <span class="tip">600*400,小于200K</span>
-      </v-upload>
+      <div style="border-bottom: 1px solid #7b6e6e;">
+        <p>图片上传</p>
+        <v-upload 
+          :name="oFile1.name"
+          :action="oFile1.action"
+          :max-size="oFile1.maxSize"
+          :data="oFile1.data"
+          :list-type="oFile1.listType"
+          :accept="oFile1.accept"
+          :multiple="oFile1.multiple"
+          :file-list="oFile1.fileList"
+          :before-upload="oFile1.beforeUpload"
+          :on-change="oFile1.onChange"
+          :on-remove="oFile1.onRemove">
+          <span class="tip">600*400,小于200K</span>
+        </v-upload>
+      </div>
+
+      <div style="border-bottom: 1px solid #7b6e6e;">
+        <p>文件上传</p>
+        <v-upload 
+          :name="oFile2.name"
+          :action="oFile2.action"
+          :max-size="oFile2.maxSize"
+          :data="oFile2.data"
+          :list-type="oFile2.listType"
+          :accept="oFile2.accept"
+          :multiple="oFile2.multiple"
+          :file-list="oFile2.fileList"
+          :before-upload="oFile2.beforeUpload"
+          :on-change="oFile2.onChange"
+          :on-remove="oFile2.onRemove">
+          <span class="tip">600*400,小于200K</span>
+        </v-upload>
+      </div>
     </section>
     <section>
       <h3>使用</h3>
@@ -118,11 +140,39 @@
     data () {
       let self = this;
       return {
-        oFile: {
+        oFile1: {
+          name: 'file',
+          listType: 'image',
+          action: './',
+          accept: 'image',
+          maxSize: 20000, // K为单位
+          fileList: [
+            {
+              name: 'lulu',
+              url: '../images/avatar.png',
+              status: true
+            }
+          ],
+          multiple: false,
+          onChange (info) {
+            self.oFile.fileList = info.fileList;
+            if('uploading' === info.file.status) {
+              console.log('正在上传：' + info.file, info.fileList);
+            }
+            if('done' === info.file.status) {
+              console.log(info.file.name + ' 上传成功.', info.fileList);
+            } else if ('error' === info.file.status) {
+              console.log(info.file.name + ' 上传失败.', info.fileList);
+            } else if ('removed' === info.file.status) {
+              console.log(info.file.name + ' 已删除.', info.fileList);
+            }
+          }
+        },
+        oFile2: {
           name: 'file',
           listType: 'text',
           action: './',
-          accept: 'text',
+          accept: '',
           maxSize: 20000, // K为单位
           fileList: [
             {

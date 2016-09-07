@@ -4,12 +4,14 @@
     <section>
       <h3>演示</h3>
       <div>
+        <v-button type="primary" @click="refresh">刷新</v-button>
         <v-transfer 
-          show-search="true"
+          show-search
           :data-source="dataSource" 
           :target-keys="targetKeys"
           :list-style="listStyle"
-          :render="render"></v-transfer>
+          :render="render"
+          :on-change="onChange"></v-transfer>
       </div>
     </section>
     <section>
@@ -30,7 +32,13 @@
                 <td>rowKey</td>
                 <td>指定数据列的主键</td>
                 <td>String</td>
-                <td>'key'</td>
+                <td>key</td>
+              </tr>
+              <tr>
+                <td>filterKey</td>
+                <td>指定搜索的键</td>
+                <td>String</td>
+                <td>title</td>
               </tr>
               <tr>
                 <td>dataSource</td>
@@ -47,7 +55,7 @@
               <tr>
                 <td>onChange</td>
                 <td>变化时回调函数</td>
-                <td>Function</td>
+                <td>Function(targetList, direction, moveList)</td>
                 <td>/</td>
               </tr>
               <tr>
@@ -106,10 +114,11 @@
   }
 </style>
 <script>
+  import vButton from "../../../components/button";
   import vTransfer from "../../../components/transfer";
 
   export default{
-    components: { vTransfer },
+    components: { vTransfer, vButton },
     data () {
       return {
         dataSource: [],
@@ -120,6 +129,9 @@
       this.getDataSource();
     },
     methods: {
+      refresh () {
+        this.getDataSource();
+      },
       render (item) {
         return item.title;
       },
@@ -131,7 +143,6 @@
             key: i,
             title: `内容${i + 1}`,
             description: `内容${i + 1}的描述`,
-            isChecked: false,
             chosen: Math.random() * 2 > 1,
           };
           if (data.chosen) {
@@ -141,6 +152,9 @@
         }
         this.targetKeys = targetKeys;
         this.dataSource = dataSource;
+      },
+      onChange (target, direction, move) {
+        console.log(target, direction, move);
       }
     }
   }

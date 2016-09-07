@@ -23,18 +23,25 @@
       </div>
       <div class="v-transfer-list-body" :class="showSearch ? 'v-transfer-list-body-with-search' : ''">
         <div v-if="showSearch" class="v-transfer-list-body-search-wrapper">
-          <v-search :placeholder="searchPlaceholder" input="true" :on-change="searchSourceHandle"></v-search>
+          <v-search
+          input
+          v-ref:source-search
+          :placeholder="searchPlaceholder"
+          :on-change="searchSourceHandle" 
+          ></v-search>
         </div>
-        <ul v-if="sourceList.length" v-el:source>
-          <li v-for="item in sourceList" v-bind:title="item|renderTitle" >
-            <v-checkbox
-            :text = "item|renderTitle"
-            :checked = "item.isChecked"
-            :on-change="selectSourceHandle.bind(this, item)"
-            ></v-checkbox>
-          </li>
+        <ul v-el:source>
+          <template v-if="sourceList.length">
+            <li v-for="item in sourceList" v-bind:title="item|renderTitle" >
+              <v-checkbox
+              :text = "item|renderTitle"
+              :checked = "item.isChecked"
+              :on-change="selectSourceHandle.bind(this, item)"
+              ></v-checkbox>
+            </li>
+          </template>
+          <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
         </ul>
-        <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
       </div>
     </div>
     <div class="v-transfer-operation">
@@ -56,18 +63,25 @@
       </div>
       <div class="v-transfer-list-body" :class="showSearch ? 'v-transfer-list-body-with-search' : ''">
         <div v-if="showSearch" class="v-transfer-list-body-search-wrapper">
-          <v-search :placeholder="searchPlaceholder" input="true" :on-change="searchTargetHandle"></v-search>
+          <v-search
+          v-ref:target-search
+          input
+          :placeholder="searchPlaceholder"
+          :on-change="searchSourceHandle" 
+          ></v-search>
         </div>
-        <ul v-if="targetList.length" v-el:target>
-          <li v-for="item in targetList" >
-            <v-checkbox
-            :text = "item|renderTitle"
-            :checked = "item.isChecked"
-            :on-change="selectTargetHandle.bind(this, item)"
-            ></v-checkbox>
-          </li>
+        <ul v-el:target>
+          <template v-if="targetList.length">
+            <li v-for="item in targetList" >
+              <v-checkbox
+              :text = "item|renderTitle"
+              :checked = "item.isChecked"
+              :on-change="selectTargetHandle.bind(this, item)"
+              ></v-checkbox>
+            </li>
+          </template>
+          <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
         </ul>
-        <p v-else class="v-transfer-list-body-not-found">{{ notFoundContent }}</p>
       </div>
     </div>
   </div>
@@ -83,6 +97,10 @@
       rowKey: {
         type: String,
         default: 'key'
+      },
+      filterKey: {
+        type: String,
+        default: 'title'
       },
       dataSource: {
         type: Array,
@@ -156,22 +174,6 @@
           return this.selectTargetList.includes(item);
         });
       },
-      // 源数组
-      sourceList () {
-        let arr = [];
-        arr = this.dataSource.filter(item => {
-          return !this.targetKeys.includes(item[this.rowKey]);
-        })
-        return arr;
-      },
-      // 目标数组
-      targetList () {
-        let arr = [];
-        arr = this.dataSource.filter(item => {
-          return this.targetKeys.includes(item[this.rowKey]);
-        })
-        return arr;
-      },
       // 源数组-选中条数/总条数
       sourceLenText () {
         let s = '';
@@ -191,30 +193,72 @@
     },
     data () {
       return {
+        sourceList: [],
+        targetList: [],
         selectSourceList: [],
         selectTargetList: []
       };
     },
+    beforeCompile () {
+      this.initList();
+    },
+    watch: {
+      dataSource () {
+        this.initList();
+      }
+    },
     methods: {
+      // 初始化源数组和目标数组
+      initList () {
+        let self = this;
+        let arr1 = [], arr2 = [], obj;
+        self.defaultDataSource = JSON.parse(JSON.stringify(self.dataSource));
+        self.defaultDataSource.forEach((item, i) => {
+          obj = {};
+          for(var e in item) {
+            obj[e] = item[e];
+          }
+          Object.assign(obj, {isChecked: false});
+          self.defaultDataSource.$set(i, obj);
+          if(self.targetKeys.includes(obj[self.rowKey])) {
+            arr1.push(obj);
+          } else{
+            arr2.push(obj);
+          } 
+        });
+        if(self.showSearch) {
+          self.$refs.sourceSearch && self.$refs.sourceSearch.refresh();
+          self.$refs.targetSearch && self.$refs.targetSearch.refresh();
+        }
+        self.sourceList = arr2;
+        self.targetList = arr1;
+      },
       // 加入到源数组 
       toSourceHandle () {
+        const moveList = this.selectTargetList;
         this.selectTargetList.forEach(item => {
           item.isChecked = false;
           this.targetKeys.$remove(item[this.rowKey]);
+          this.targetList.$remove(item);
+          this.sourceList.unshift(item);
         });
+        // this.sourceList = this.selectTargetList.concat(this.sourceList);
         this.selectTargetList = [];
         this.$els.source.scrollTop = 0;
+        this.onChange(this.targetList, 'left', moveList);
       },
       // 加入到目标数组
       toTargetHandle () {
-        let arr = [];
+        const moveList = this.selectSourceList;
         this.selectSourceList.forEach(item => {
           item.isChecked = false;
-          arr.push(item[this.rowKey]);
+          this.sourceList.$remove(item);
+          this.targetKeys.push(item[this.rowKey]);
+          this.targetList.unshift(item);
         });
-        this.targetKeys = arr.concat(this.targetKeys);
         this.selectSourceList = [];
         this.$els.target.scrollTop = 0;
+        this.onChange(this.targetList, 'right', moveList);
       },
       // 源数组-全选
       selectAllSourceHandle (flag) {
@@ -266,11 +310,31 @@
       },
       // 源数组-搜索
       searchSourceHandle (con) {
-        console.log(con)
+        this.sourceMessage = con;
+        this.search(con, 'source');
       },
       // 目标数组-搜索
       searchTargetHandle (con) {
-        console.log(con)
+        this.targetMessage = con;
+        this.search(con, 'target');
+      },
+      // 搜索
+      search (con, type) {
+        let self = this, arr1 = [], arr2 = [];
+        self.defaultDataSource.forEach((item, i) => {
+          if(item[self.filterKey].indexOf(con) > -1) {
+            if(self.targetKeys.includes(item[self.rowKey])) {
+              arr1.push(item);
+            } else{
+              arr2.push(item);
+            }
+          }
+        });
+        if('source' == type) {
+          self.sourceList = arr2;
+        } else{
+          self.targetList = arr1;
+        }
       }
     }
   }

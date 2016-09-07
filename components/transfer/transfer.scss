@@ -3,6 +3,7 @@ $transfer-prefix: v-transfer;
 .#{$transfer-prefix}{
   position: relative;
   line-height: 1.5;
+  text-align: center;
 }
 .#{$transfer-prefix}-list{
   background: #fff;
@@ -80,6 +81,9 @@ $transfer-prefix: v-transfer;
   height: 28px;
   padding: 4px;
   width: 100%;
+  .input-group{
+    display: block;
+  }
   .form-control{
     height: 28px;
     font-size: 12px;

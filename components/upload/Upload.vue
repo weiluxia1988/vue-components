@@ -31,7 +31,7 @@ beforeUpload 上传文件之前的钩子,返回false,则停止上传
     </ajax-upload>
     <slot></solt>
   </div>
-  <upload-list :list="fileList" :on-remove="onRemove"></upload-list>
+  <upload-list :list="fileList" :on-remove="onRemove" :list-type="listType"></upload-list>
 </div>
 </template>
 <script>

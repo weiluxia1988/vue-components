@@ -1,5 +1,5 @@
 <template>
-<div class="v-upload-list">
+<div class="v-upload-list" :class="className">
   <div class="v-upload-list-item" v-for="item in list">
     <div class="v-upload-list-mask" v-if="item.status=='uploading'">
       <v-progress 
@@ -19,6 +19,10 @@
 import vProgress from '../progress';
 export default {
   props: {
+    listType: {
+      type: String,
+      default: 'image'
+    },
     list: {
       type: Array,
       default: function() {
@@ -36,6 +40,11 @@ export default {
     return {
       showInfo: false,
       strokeWidth: 6
+    }
+  },
+  computed: {
+    className () {
+      return this.listType == 'image' ? 'v-upload-list-image' : 'v-upload-list-text';
     }
   },
   components: {vProgress},

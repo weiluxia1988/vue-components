@@ -29,7 +29,6 @@ import vTooltip from './tooltip';
 import vTree from './tree';
 import vTransfer from './transfer';
 import vUpload from './upload';
-
 export {
   vAffix,
   vAlert,
@@ -54,7 +53,6 @@ export {
   vPopconfirm,
   vPopover,
   vRadio,
-  vRadioGroup,
   vSelect,
   vSwitch,
   vTab,
