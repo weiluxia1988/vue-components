@@ -9,9 +9,12 @@
   width 宽度  String or Number  默认值：600
   ok-text 确定文本  String  确定
   cancel-text 取消文本
+  showOk 显示确定按钮
+  showCancel 显示取消按钮
 -->
 <template>
 <div class="modal" 
+  :class="show ? 'show' : ''"
   v-show="show"
   @click="closeHandle"
 >
@@ -28,11 +31,11 @@
         <slot></slot>
       </div>
       <div class="modal-footer">
-        <v-button type="default"
+        <v-button type="default" v-if="showCancel"
           @click="closeHandle">
           {{cancelText}}
         </v-button>
-        <v-button type="primary" :loading="confirmLoading"
+        <v-button type="primary" :loading="confirmLoading" v-if="showOK"
           @click="okHandle">
           {{okText}}
         </v-button>
@@ -48,6 +51,16 @@
     components: { vButton },
     props: {
       show: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: true
+      },
+      showOK: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: true
+      },
+      showCancel: {
         type: Boolean,
         coerce: Util.coerceBoolean,
         default: true

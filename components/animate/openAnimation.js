@@ -12,7 +12,6 @@ function animate (node, show, duration, transitionName, done) {
 
   // Fix safari flash bug
   node.style.display = show ? 'block' : 'none';
-  console.log(duration)
   velocity(node, transitionName, {
     duration: duration,
     complete: complete,

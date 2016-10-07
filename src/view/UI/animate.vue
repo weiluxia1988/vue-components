@@ -51,7 +51,8 @@
                 <td>Function</td>
                 <td>new Function()</td>
               </tr>
-              <tr>onLeave</td>
+              <tr>
+                <td>onLeave</td>
                 <td>隐藏动画回调</td>
                 <td>Function</td>
                 <td>new Function()</td>
@@ -64,11 +65,6 @@
   </article>
 </template>
 <style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-
   /* 必需 */
   .fade-transition {
     height: 30px;

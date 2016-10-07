@@ -20,6 +20,12 @@
   export default{
     components: { },
     props: {
+      menu: {
+        type: Array,
+        default () {
+          return [];
+        }
+      },
       theme: {
         type: String,
         default: 'light'

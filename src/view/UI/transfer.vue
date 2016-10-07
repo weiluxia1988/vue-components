@@ -7,6 +7,7 @@
         <v-button type="primary" @click="refresh">刷新</v-button>
         <v-transfer 
           show-search
+          insert="after"
           :data-source="dataSource" 
           :target-keys="targetKeys"
           :list-style="listStyle"
@@ -107,12 +108,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import vTransfer from "../../../components/transfer";
@@ -128,21 +123,26 @@
     created () {
       this.getDataSource();
     },
+    watch: {
+      targetKeys (val) {
+        console.log(val)
+      }
+    },
     methods: {
       refresh () {
-        this.getDataSource();
+        this.getDataSource(true);
       },
       render (item) {
         return item.title;
       },
-      getDataSource() {
+      getDataSource(flag) {
         const targetKeys = [];
         const dataSource = [];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 1; i < 20; i++) {
           const data = {
             key: i,
-            title: `内容${i + 1}`,
-            description: `内容${i + 1}的描述`,
+            title: `内容${i}`,
+            description: `内容${i}的描述`,
             chosen: Math.random() * 2 > 1,
           };
           if (data.chosen) {
@@ -151,7 +151,9 @@
           dataSource.push(data);
         }
         this.targetKeys = targetKeys;
-        this.dataSource = dataSource;
+        if(!flag) {
+          this.dataSource = dataSource
+        }
       },
       onChange (target, direction, move) {
         console.log(target, direction, move);

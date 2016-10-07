@@ -1,170 +1,355 @@
 <template>
     <section class="content-header">
-        <h1>表单验证</h1>
+        <h1>表单验证
+            <small>原生vue-validator</small>
+        </h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <h4>普通表单验证</h4>
-                <validator name="validation0" :groups="['password']">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="username" class="col-sm-2 control-label">用户名:</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="username" v-validate:username="username" placeholder="请填写你的用户名" class="form-control" :classes="styleValid" />
-                                <p v-if="$validation0.username.required" class="help-block">请填写你的用户名</p>
-                                <p v-if="!($validation0.username.required)" class="help-block">谢谢您的输入</p>
-                            </div>
-                        </div>
-                        <div class="form-group" v-validate-class>
-                            <label for="password1" class="col-sm-2 control-label">密码:</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="password1" group="password" v-validate:password1="password1" placeholder="请填写你的密码" class="form-control" :classes="stylePassword1" />
-                            </div>
-                        </div>
-                        <div class="form-group" v-validate-class>
-                            <label for="password2" class="col-sm-2 control-label">重复密码:</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="password2" group="password" v-validate:password2="password2" placeholder="请填写你的密码" class="form-control" :classes="stylePassword2" />
-                                <p v-if="$validation0.password.invalid" class="help-block">请确认密码是否相同,至少8个字符</p>
-                            </div>
-                        </div>
-                        <div class="form-group" v-validate-class>
-                            <label for="comment" class="col-sm-2 control-label">字符数量:</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="comment" v-validate:rules="rules" placeholder="请输入3-6个字符" class="form-control" :classes="styleRules" />
-                                <p v-if="$validation0.rules.minlength" class="help-block">字符数量小于3个.</p>
-                                <p v-if="$validation0.rules.maxlength" class="help-block">字符数量大于6个.</p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation0.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
-                <h4>表单验证事件</h4>
-                <validator name="validation1">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="vevent" class="col-sm-2 control-label">事件:</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="vevent" v-validate:vevent="vevent" @valid="onValid" @invalid="onInvalid" @touched="onTouched" @dirty="onDirty" @modified="onModified" placeholder="请打开控制台,并在input内输入字符" class="form-control" :classes="styleVevent" />
-                                <p v-if="$validation1.vevent.required" class="help-block">请打开控制台,并在input内输入字符</p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation1.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
-                <h4>自定义表单验证</h4>
-                <validator name="validation2">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="site" class="col-sm-2 control-label">自定义验证(url):</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="site" v-validate:site="['url']" placeholder="请输入网址" class="form-control" :classes="styleUrl" />
-                                <p v-if="$validation2.site.url" class="help-block">例如:http://www.bianfeng.com/</p>
-                            </div>
-                        </div>
-                        <div class="form-group" v-validate-class>
-                            <label for="address" class="col-sm-2 control-label">自定义验证(email):</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="address" v-validate:address="['email']" placeholder="请输入网址" class="form-control" :classes="styleEmail" />
-                                <p v-if="$validation2.address.email" class="help-block">例如:qianzhangsheng@bianfeng.com</p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation2.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
-                <h4>单选框验证</h4>
-                <validator name="validation3">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="address" class="col-sm-2 control-label">单选框:</label>
-                            <div class="checkbox col-sm-10">
-                                <p>
-                                    <label>
-                                        <input type="radio" v-validate:fruits="radioconfig" name="fruits" :classes="styleRadio" /> 单选1
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="radio" v-validate:fruits name="fruits" :classes="styleRadio" /> 单选2
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="radio" v-validate:fruits name="fruits" :classes="styleRadio" /> 单选2
-                                    </label>
-                                </p>
-                                <p v-for="error in $validation3.errors" class="help-block">
-                                    {{error.message}}
-                                </p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation3.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
-                <h4>复选框验证</h4>
-                <validator name="validation4">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="address" class="col-sm-2 control-label">复选框:</label>
-                            <div class="checkbox col-sm-10">
-                                <p>
-                                    <label>
-                                        <input type="checkbox" v-validate:fruits="checkboxconfig" value="a" :classes="styleCheckbox" /> 复选1
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" v-validate:fruits value="b" :classes="styleCheckbox" /> 复选2
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" v-validate:fruits value="c" :classes="styleCheckbox" /> 复选2
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" v-validate:fruits value="d" :classes="styleCheckbox" /> 复选2
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input type="checkbox" v-validate:fruits value="e" :classes="styleCheckbox" /> 复选2
-                                    </label>
-                                </p>
-                                <p v-for="error in $validation4.errors" class="help-block">
-                                    {{error.message}}
-                                </p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation4.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
-                <h4>下拉列表验证</h4>
-                <validator name="validation5">
-                    <form class="form-horizontal" novalidate>
-                        <div class="form-group" v-validate-class>
-                            <label for="address" class="col-sm-2 control-label">下拉列表:</label>
-                            <div class="checkbox col-sm-10">
-                                <select v-validate:lang="selectconfig" class="form-control" :classes="styleSelect">
-                                    <option value="">--- 请选择 ---</option>
-                                    <option value="javascript">JavaScript是世界上最好的语言</option>
-                                    <option value="ruby">Ruby</option>
-                                    <option value="python">Python</option>
-                                    <option value="perl">Perl</option>
-                                    <option value="lua">Lua</option>
-                                    <option value="go">Go</option>
-                                    <option value="PHP">PHP</option>
-                                    <option value="c">C</option>
-                                    <option value="none">Not a nothing here</option>
-                                </select>
-                                <p v-if="$validation5.lang.required">亲,你必须选择一个</p>
-                            </div>
-                        </div>
-                        <button type="submit" v-if="$validation5.valid" class="btn btn-success"> 提交</button>
-                    </form>
-                </validator>
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+                        <h3 class="box-title">何时使用</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="text-muted">需要对用户输入的from表单进行验证时。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="page-header"><i class="fa fa-code"></i> 代码演示</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">普通表单验证</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation0"
+                                   :groups="['password']">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="username"
+                                           class="col-sm-2 control-label">用户名:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="username"
+                                               v-validate:username="username"
+                                               placeholder="请填写你的用户名"
+                                               class="form-control"
+                                               :classes="styleValid" />
+                                        <p v-if="$validation0.username.required"
+                                           class="help-block">请填写你的用户名</p>
+                                        <p v-if="!($validation0.username.required)"
+                                           class="help-block">谢谢您的输入</p>
+                                    </div>
+                                </div>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="password1"
+                                           class="col-sm-2 control-label">密码:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="password1"
+                                               group="password"
+                                               v-validate:password1="password1"
+                                               placeholder="请填写你的密码"
+                                               class="form-control"
+                                               :classes="stylePassword1" />
+                                    </div>
+                                </div>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="password2"
+                                           class="col-sm-2 control-label">重复密码:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="password2"
+                                               group="password"
+                                               v-validate:password2="password2"
+                                               placeholder="请填写你的密码"
+                                               class="form-control"
+                                               :classes="stylePassword2" />
+                                        <p v-if="$validation0.password.invalid"
+                                           class="help-block">请确认密码是否相同,至少8个字符</p>
+                                    </div>
+                                </div>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="comment"
+                                           class="col-sm-2 control-label">字符数量:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="comment"
+                                               v-validate:rules="rules"
+                                               placeholder="请输入3-6个字符"
+                                               class="form-control"
+                                               :classes="styleRules" />
+                                        <p v-if="$validation0.rules.minlength"
+                                           class="help-block">字符数量小于3个.</p>
+                                        <p v-if="$validation0.rules.maxlength"
+                                           class="help-block">字符数量大于6个.</p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation0.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <h3 class="box-title">表单验证事件</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation1">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="vevent"
+                                           class="col-sm-2 control-label">事件:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="vevent"
+                                               v-validate:vevent="vevent"
+                                               @valid="onValid"
+                                               @invalid="onInvalid"
+                                               @touched="onTouched"
+                                               @dirty="onDirty"
+                                               @modified="onModified"
+                                               placeholder="请打开控制台,并在input内输入字符"
+                                               class="form-control"
+                                               :classes="styleVevent" />
+                                        <p v-if="$validation1.vevent.required"
+                                           class="help-block">请打开控制台,并在input内输入字符</p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation1.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header">
+                        <h3 class="box-title">自定义表单验证</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation2">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="site"
+                                           class="col-sm-2 control-label">自定义验证(url):</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="site"
+                                               v-validate:site="['url']"
+                                               placeholder="请输入网址"
+                                               class="form-control"
+                                               :classes="styleUrl" />
+                                        <p v-if="$validation2.site.url"
+                                           class="help-block">例如:http://www.bianfeng.com/</p>
+                                    </div>
+                                </div>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="address"
+                                           class="col-sm-2 control-label">自定义验证(email):</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                               id="address"
+                                               v-validate:address="['email']"
+                                               placeholder="请输入网址"
+                                               class="form-control"
+                                               :classes="styleEmail" />
+                                        <p v-if="$validation2.address.email"
+                                           class="help-block">例如:qianzhangsheng@bianfeng.com</p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation2.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">单选框验证</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation3">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="address"
+                                           class="col-sm-2 control-label">单选框:</label>
+                                    <div class="checkbox col-sm-10">
+                                        <p>
+                                            <label>
+                                                <input type="radio"
+                                                       v-validate:fruits="radioconfig"
+                                                       name="fruits"
+                                                       :classes="styleRadio" /> 单选1
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="radio"
+                                                       v-validate:fruits
+                                                       name="fruits"
+                                                       :classes="styleRadio" /> 单选2
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="radio"
+                                                       v-validate:fruits
+                                                       name="fruits"
+                                                       :classes="styleRadio" /> 单选2
+                                            </label>
+                                        </p>
+                                        <p v-for="error in $validation3.errors"
+                                           class="help-block">
+                                            {{error.message}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation3.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <h3 class="box-title">复选框验证</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation4">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="address"
+                                           class="col-sm-2 control-label">复选框:</label>
+                                    <div class="checkbox col-sm-10">
+                                        <p>
+                                            <label>
+                                                <input type="checkbox"
+                                                       v-validate:fruits="checkboxconfig"
+                                                       value="a"
+                                                       :classes="styleCheckbox" /> 复选1
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox"
+                                                       v-validate:fruits
+                                                       value="b"
+                                                       :classes="styleCheckbox" /> 复选2
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox"
+                                                       v-validate:fruits
+                                                       value="c"
+                                                       :classes="styleCheckbox" /> 复选2
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox"
+                                                       v-validate:fruits
+                                                       value="d"
+                                                       :classes="styleCheckbox" /> 复选2
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox"
+                                                       v-validate:fruits
+                                                       value="e"
+                                                       :classes="styleCheckbox" /> 复选2
+                                            </label>
+                                        </p>
+                                        <p v-for="error in $validation4.errors"
+                                           class="help-block">
+                                            {{error.message}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation4.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header">
+                        <h3 class="box-title">下拉列表验证</h3>
+                    </div>
+                    <div class="box-body">
+                        <validator name="validation5">
+                            <form class="form-horizontal"
+                                  novalidate>
+                                <div class="form-group"
+                                     v-validate-class>
+                                    <label for="address"
+                                           class="col-sm-2 control-label">下拉列表:</label>
+                                    <div class="checkbox col-sm-10">
+                                        <select v-validate:lang="selectconfig"
+                                                class="form-control"
+                                                :classes="styleSelect">
+                                            <option value="">--- 请选择 ---</option>
+                                            <option value="javascript">JavaScript是世界上最好的语言</option>
+                                            <option value="ruby">Ruby</option>
+                                            <option value="python">Python</option>
+                                            <option value="perl">Perl</option>
+                                            <option value="lua">Lua</option>
+                                            <option value="go">Go</option>
+                                            <option value="PHP">PHP</option>
+                                            <option value="c">C</option>
+                                            <option value="none">Not a nothing here</option>
+                                        </select>
+                                        <p v-if="$validation5.lang.required">亲,你必须选择一个</p>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        v-if="$validation5.valid"
+                                        class="btn btn-success"> 提交
+                                </button>
+                            </form>
+                        </validator>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

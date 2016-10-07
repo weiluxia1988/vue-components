@@ -7,7 +7,7 @@
   perpage 每页显示数量
 -->
 <template>
-<ul class="pagination pagination-sm no-margin" v-if="pcount > 1">
+<ul class="pagination" :class="className" v-if="pcount > 1">
   <li v-bind:class="curpage <= 1 ? 'disabled' : ''">
     <a href="javascript:;" @click="prev">«</a>
   </li>
@@ -52,8 +52,18 @@
     }
     return pager_list;
   }
+  const oSize = {
+    'medium': 'pagination-md',
+    'big': 'pagination-lg',
+    'small': 'pagination-sm',
+    'xSmall': 'pagination-xs'
+  };
   export default {
     props: {
+      size: {
+        type: String,
+        default: 'medium'
+      },
       rcount: {
         type: Number,
         default: 0
@@ -80,6 +90,9 @@
     computed: {
       list: function() {
         return getPages({curpage: this.curpage, pcount: this.pcount, rcount: this.rcount, perpage: this.perpage});
+      },
+      className () {
+        return oSize[this.size];
       }
     },
     methods: {

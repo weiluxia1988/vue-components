@@ -173,12 +173,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vCollapse from "../../../components/collapse";
   const vPanel = vCollapse.vPanel;

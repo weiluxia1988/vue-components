@@ -14,57 +14,42 @@
   ]
 -->
 <template>
-  <aside class="main-sidebar">
-    <section class="sidebar">
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../../images/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>{{nickName}}</p>
-        </div>
-      </div>
-      <v-menu
-        theme="dark"
-        mode="inline"
-        :menus="menus"
-      > 
-        <template v-for="item in menus">
-          <template v-if="0 == item.children.length">
-            <v-menu-item :key="item.url">
+  <aside class="main-sidebar hideScroll">
+    <v-affix offset-top="50">
+      <section class="sidebar">
+        <v-menu
+          theme="dark"
+          mode="inline"
+        > 
+          <template v-for="item in menus">
+            <v-menu-item v-if="!item.children || 0 == item.children.length" :key="item.url">
               <a v-if="item.isHref" :href="item.url">{{{item.title}}}</a>
               <a v-else v-link="{ path:item.url }">{{{item.title}}}</a>
             </v-menu-item>
-          </template>
-          <template v-else>
             <v-sub-menu 
+              v-else
               :title='item.title'>
               <template v-for="childitem in item.children">
-                <template v-if="!childitem.children || 0 == childitem.children.length">
-                  <v-menu-item :key="childitem.url">
-                    <a v-if="childitem.isHref" :href="childitem.url">{{{ childitem.title }}}</a>
-                    <a v-else v-link="{ path:childitem.url }">{{{ childitem.title }}}</a>
-                  </v-menu-item>
-                </template>
-                <template v-else>
-                  <v-sub-menu 
-                    :title='item.title'>
-                    <template v-for="subChilditem in childitem.children">
-                      <template v-if="!subChilditem.children || 0 == subChilditem.children.length">
-                        <v-menu-item :key="subChilditem.url">
-                          <a v-if="subChilditem.isHref" :href="subChilditem.url">{{{ subChilditem.title }}}</a>
-                          <a v-else v-link="{ path:subChilditem.url }">{{{ subChilditem.title }}}</a>
-                        </v-menu-item>
-                      </template>
-                    </template>
-                  </v-sub-menu>
-                </template>
+                <v-menu-item v-if="!childitem.children || 0 == childitem.children.length" :key="childitem.url">
+                  <a v-if="childitem.isHref" :href="childitem.url">{{{ childitem.title }}}</a>
+                  <a v-else v-link="{ path:childitem.url }">{{{ childitem.title }}}</a>
+                </v-menu-item>
+                <v-sub-menu
+                  v-else
+                  :title='item.title'>
+                  <template v-for="subChilditem in childitem.children">
+                    <v-menu-item v-if="!subChilditem.children || 0 == subChilditem.children.length" :key="subChilditem.url">
+                      <a v-if="subChilditem.isHref" :href="subChilditem.url">{{{ subChilditem.title }}}</a>
+                      <a v-else v-link="{ path:subChilditem.url }">{{{ subChilditem.title }}}</a>
+                    </v-menu-item>
+                  </template>
+                </v-sub-menu>
               </template>
             </v-sub-menu>
           </template>
-        </template>
-      </v-menu>
-    </section>
+        </v-menu>
+      </section>
+    </v-affix>
   </aside>
 </template>
 <style>
@@ -73,9 +58,10 @@
   }
 </style>
 <script>
+  import vAffix from "../../components/affix";
   import {vMenu, vSubMenu, vMenuItem} from "../../components/menu";
   export default {
-    components: { vMenu, vMenuItem, vSubMenu },
+    components: { vAffix, vMenu, vMenuItem, vSubMenu },
     props: ['baseInfo'],
     computed: {
       nickName: function() {

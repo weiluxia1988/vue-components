@@ -5,7 +5,7 @@
       <h3>演示</h3>
       <div style="text-align:center">
         <v-tooltip disabled title="标题标题标题" placement="leftTop">
-          <v-button type="default">点我-左上</v-button>
+          <v-button type="default">点我-左上(禁止)</v-button>
         </v-tooltip>
         <v-tooltip title="标题标题标题" placement="left">
           <v-button type="default">点我-左边</v-button>
@@ -81,12 +81,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import vTooltip from "../../../components/tooltip";

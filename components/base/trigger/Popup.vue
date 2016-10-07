@@ -2,8 +2,8 @@
   <slot></slot>
 </template>
 <script>
-  import * as Util from "../../Util";
-  import align from 'dom-align'
+  import * as Util from "../../utils";
+  import align from 'dom-align';
   export default{
     props: {
       className: {

@@ -3,20 +3,19 @@
   weiluxia 2016.07.20
 -->
 <template>
-    <div class="form-group col-md-7 padding-none">
-      <label class="control-label">时间：</label>
-      <div class="col-md-4 padding-none btn-group" v-if="ranges.length">
-        <button type="button" class="btn btn-info" v-for="item in ranges" v-if="$index < 3" @click="selectHandle(item)">{{ item.title }}</button>
-      </div>
-      <div class="col-sm-6 input-group">
-        <div class="input-group-addon">
-          <i class="fa fa-calendar"></i>
-        </div>
-        <input type="hidden" value="{{ startTime }}" name="{{keyStartName}}">
-        <input type="hidden" value="{{ endTime }}" name="{{keyEndName}}">
-        <input v-el:reservationtime type="text" :value="time" class="form-control pull-right" placeholder="{{placeholder}}">
-      </div>
+  <div class="col-sm-6 btn-group padding-none" v-if="ranges.length">
+    <template v-for="item in ranges">
+      <button type="button" class="btn btn-info" v-if="$index < 3" @click="selectHandle(item)">{{ item.title }}</button>
+    </template>
+  </div>
+  <div class="input-group" :class="ranges.length ? 'col-sm-6 ': 'col-sm-12'">
+    <div class="input-group-addon">
+      <i class="fa fa-calendar"></i>
     </div>
+    <input type="hidden" value="{{ startTime }}" name="{{keyStartName}}">
+    <input type="hidden" value="{{ endTime }}" name="{{keyEndName}}">
+    <input v-el:reservationtime type="text" :value="time" class="form-control pull-right" placeholder="{{placeholder}}">
+  </div>
 </template>
 <script>
   import $ from 'jquery';
@@ -144,8 +143,6 @@
         options.maxDate = self.maxDate;
       }
 
-
-
       $(self.$els.reservationtime).daterangepicker(options);
 
       $(self.$els.reservationtime).on('apply.daterangepicker', function(ev, picker) {
@@ -158,6 +155,17 @@
         self.startTime = '';
         self.endTime = '';
         self.onChange();
+      });
+
+      $(self.$els.reservationtime).on('show.daterangepicker', function(ev, picker) {
+        $(document).on('scroll.daterangepicker', function() {
+          $(self.$els.reservationtime).blur();
+          picker.hide();
+        });
+      });
+
+      $(self.$els.reservationtime).on('hide.daterangepicker', function(ev, picker) {
+        $(document).off('scroll.daterangepicker');
       });
     }
   }

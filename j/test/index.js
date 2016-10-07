@@ -63,7 +63,7 @@
             ]
           },
           {
-            "name": "from",
+            "name": "form",
             "icon": "fa-edit",
             "isHref": false,
             "url": "",
@@ -143,12 +143,6 @@
                 "icon": "fa-circle-o",
                 "isHref": false,
                 "url": "/UI/animate"
-              },
-              {
-                "name": "拖拽",
-                "icon": "fa-circle-o",
-                "isHref": false,
-                "url": "/UI/draggable"
               },
               {
                 "name": "进度条",
@@ -292,49 +286,16 @@
       data = baseinfo;
     }
 
-    if(url.indexOf('/newsType\/list') > -1) {
-      message = 'newsType list ok';
-      var oType = {
-        'id|+1': 1,
-        'name|1-3': '分类',
-        'sort|+1': 1,
-        'createdtime': Mock.mock('@datetime')
-      };
-      var typeListPager = {
-        'list|8-10': [oType],
-        'page': {
-          'curpage': 0,
-          'pcount': 0,
-          'rcount': 0
-        }
-      };
-      data = Mock.mock(typeListPager);
-    }
-
-    if(url.indexOf('/newsType\/delete') > -1) {
-      message = 'newsType delete ok';
-    }
-
-    if(url.indexOf('/newsType\/edit') > -1) {
-      message = 'newsType edit ok';
-    }
-
-    if(url.indexOf('/newsType\/add') > -1) {
-      message = 'newsType add ok';
-    }
-
-    if(url.indexOf('/newsType\/sort') > -1) {
-      message = 'newsType sort ok';
-    }
-
-    if(url.indexOf('/news\/list') > -1) {
-      message = 'news list ok';
+    if(url.indexOf('/table') > -1) {
+      message = 'table list ok';
        var oNew = {
         'id|1-10': 1,
         'title|1-3': '中文',
         'author|1-3': '作者',
         'status|0-1': 1,
         'isTop|0-1': 1,
+        'isOpen': false,
+        'isEdit': false,
         'createtime': Mock.mock('@datetime')
       };
       var newListPager = {
@@ -346,44 +307,6 @@
         }
       };
       data = Mock.mock(newListPager);
-    }
-
-    if(url.indexOf('/news\/delete') > -1) {
-      message = 'news delete ok';
-    }
-
-    if(url.indexOf('/news\/top') > -1) {
-      message = 'news top ok';
-    }
-
-    if(url.indexOf('/news\/show') > -1) {
-      message = 'news show ok';
-    }
-
-    if(url.indexOf('/news\/edit') > -1) {
-      message = 'news edit ok';
-      data = {
-        title: 'wwwww',
-        author: 'lulu',
-        content: '2222222',
-        typeId: '1',
-        status: 1,
-        bannerName: 'lulu',
-        banner: 'http://img1.qpdiy.com/uploads/materials/images/201606/223703cf600715559cbf46583d55cac5.jpg'
-      };
-    }
-
-    if(url.indexOf('/news\/get') > -1) {
-      message = 'news edit ok';
-      data = {
-        title: 'wwwww',
-        author: 'lulu',
-        content: '2222222',
-        typeId: '1',
-        status: 1,
-        bannerName: 'lulu',
-        banner: 'http://img1.qpdiy.com/uploads/materials/images/201606/223703cf600715559cbf46583d55cac5.jpg'
-      };
     }
 
     if(url.indexOf('/testajax') > -1) {

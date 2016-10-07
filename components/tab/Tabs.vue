@@ -13,7 +13,7 @@
     </ul>
 
     <!-- Tab panes -->
-    <div role="tabContent" v-el:tab-content>
+    <div class="tab-content" role="tabContent" v-el:tab-content>
       <slot></slot>
     </div> 
   </div>

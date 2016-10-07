@@ -1,20 +1,61 @@
 @import '../style/base';
 $progress-prefix: v-progress;
+$error: #f50;
+$success: #87d068;
+$normal: #2db7f5;
+$bg: #e9e9e9;
 .#{$progress-prefix}-outer {
   margin: 0 5px;
 }
+
 .#{$progress-prefix}-inner {
   display: inline-block;
   width: 100%;
-  background-color: #e4dbdb;
+  background-color: $bg;
   border-radius: 100px;
+  position: relative;
 }
+
+.#{$progress-prefix}-text{
+  font-family: tahoma;
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.#{$progress-prefix}-line{
+  .#{$progress-prefix}-text{
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+  }
+}
+
+.#{$progress-prefix}-circle{
+  .#{$progress-prefix}-inner {
+    line-height: 1;
+    background-color: transparent;
+  }
+  .#{$progress-prefix}-text {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    line-height: 1;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+} 
+
 .#{$progress-prefix}-bg {
   position: relative;
   width: 100%;
   height: 10px;
   border-radius: 100px;
-  background-color: #2db7f5;
+  background-color: $normal;
   transition: all 0.3s linear 0s;
   &:before{
     content: "";
@@ -29,6 +70,18 @@ $progress-prefix: v-progress;
     animation: progress-active 2s ease infinite;
   }
 }
+
+.#{$progress-prefix}-status-success {
+  .#{$progress-prefix}-text {
+    color: $success;
+  }
+}
+.#{$progress-prefix}-status-error {
+  .#{$progress-prefix}-text {
+    color: $error;
+  }
+}
+
 @keyframes progress-active {
   0% {
     opacity: .3;

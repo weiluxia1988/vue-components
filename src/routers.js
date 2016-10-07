@@ -31,11 +31,11 @@ import popconfirm from './view/UI/popconfirm.vue';
 import affix from './view/UI/affix.vue';
 import tag from './view/UI/tag.vue';
 import tree from './view/UI/tree.vue';
-import draggable from './view/UI/draggable.vue';
 import transfer from './view/UI/transfer.vue';
 
 import pagination from './view/Navigation/pagination.vue';
 import tab from './view/Navigation/tab.vue';
+import breadcrumb from './view/Navigation/breadcrumb.vue';
 import menu from './view/Navigation/menu.vue';
 export default function(router) {
   router.map({
@@ -83,7 +83,7 @@ export default function(router) {
 
 
     '/table/table': {
-      component: table // table1
+      component: table // table
     },
 
 
@@ -126,9 +126,6 @@ export default function(router) {
     '/UI/animate': {
       component: animate // 动画
     },
-    '/UI/draggable': {
-      component: draggable // 拖拽
-    },
     '/UI/affix': {
       component: affix // 固钉
     },
@@ -150,6 +147,9 @@ export default function(router) {
     },
     '/Navigation/menu': {
       component: menu // 导航菜单
-    }
+    },
+    '/Navigation/breadcrumb': {
+      component: breadcrumb // 面包屑
+    },
   });
 };

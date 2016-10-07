@@ -3,8 +3,8 @@
   weiluxia 2016.07.18  
   rowSelection 列表项是否可选择
   expandedRowRender 展开详细信息
-  draging 是否拖拽
-  dragCallcack 回调
+  draggable 是否拖拽
+  onDrag 回调
   pagination 分页
   dataSource 数据数组
   columns 表格列的配置描述
@@ -34,15 +34,22 @@
           </thead>
           <tbody v-el:drag-box>
             <template v-cloak v-for="item in dataSource">
-              <tr data-sort="{{item.sort}}">
+              <tr data-sort="{{item.sort}}"
+                draggable="{{draggable}}"
+                @dragstart="dragstartHandle($index)"
+                @dragenter="dragenterHandle($index)"
+                @dragover="dragoverHandle($index)"
+                @dragleave="dragleaveHandle($index)"
+                @drop="dropHandle($index)"
+                @dragend="dragendHandle($index)"
+              >
                 <template v-for="col in columns">
                   <template v-if="col.visible">
                     <td v-if="col.isAction" class={{col.dataClass}}>
-                      <a href="javascript:;" v-if="draging && item.isDrag" class="btn btn-default js-sort" title="拖拽">
+                      <a href="javascript:;" v-if="draggable" class="btn btn-default js-sort" title="拖拽">
                         <i class="fa fa-arrows"></i>
                       </a>
                       <template v-else>
-                        
                         <template v-if="opening">
                           <a href="javascript:;" v-show="!item.isOpen"  @click="toggleStateHandle(item, 'isOpen')" class="btn btn-default js-sort" title="展开">
                             <i class="fa fa-arrow-down"></i>
@@ -60,7 +67,6 @@
                             <i class="fa fa-check-square-o"></i>
                           </a>
                         </template>
-
                         <template v-for="action in itemActions">
                           <template v-if="action.dataIndex">
                             <template v-for="list in action.list">
@@ -75,9 +81,7 @@
                             </a>
                           </template>
                         </template>
-
                       </template>
-
                     </td>
                     <td v-else class={{col.dataClass}}>
                       <template v-if="!(col.isEdit && item.isEdit)">{{{ callCallback(col, item) }}}</template>
@@ -110,10 +114,9 @@
 </template>
 <script>
   import './table.scss';
-  import $ from "jquery";
-  import "jquery-ui";
   import vPagination from "../pagination";
   import vLoading from "../loading";
+  import * as Util from "../Util";
   export default{
     props: {
       'dataSource': {
@@ -150,21 +153,9 @@
           return new Function();
         }
       },
-      'draging': {
+      'draggable': {
         type: Boolean,
-        coerce: function(val) {
-          if(typeof val !== "string") {
-            return val;
-          } else if(val === "true") {
-            return true;
-          } else if(val === "false") {
-            return false;
-          } else if(val === "null") {
-            return false;
-          } else if(val === "undefined") {
-            return false;
-          } 
-        },
+        coerce: Util.coerceBoolean,
         default: false
       },
       'expandedRowRender': null,
@@ -174,19 +165,7 @@
       },
       'loading': {
         type: Boolean,
-        coerce: function(val) {
-          if(typeof val !== "string") {
-            return val;
-          } else if(val === "true") {
-            return true;
-          } else if(val === "false") {
-            return false;
-          } else if(val === "null") {
-            return false;
-          } else if(val === "undefined") {
-            return false;
-          } 
-        },
+        coerce: Util.coerceBoolean,
         default: false
       },
       'noDataClass': {
@@ -215,37 +194,6 @@
     watch: {
       dataSource (value) {
         this.compileRender();
-      },
-      draging (value) {
-        var self = this;
-        if(value) {
-          $(this.$els.dragBox).sortable({
-            revert: true,
-            containment: "parent",
-            handle: '.js-sort'
-          });
-          $.each(self.dataSource, function(i, one) {
-            one.isDrag = true;
-            one.isEdit = false;
-            one.isOpen = false;
-          });
-        } else{
-          $(this.$els.dragBox).sortable( "destroy" );
-          var arr1 = [];
-          $(this.$els.dragBox).find('tr').each(function(i, el) {
-            arr1.push($(el).data('sort'))
-          });
-          var oData = {};
-          var arr2 = JSON.parse(JSON.stringify(self.dataSource));
-          for(var i = 0; i < arr2.length; i++) {
-            var one = arr2[i];
-            oData[one.sort] = one;
-          }
-          for(var j = 0; j < arr1.length; j++) {
-            self.dataSource.$set(j, oData[arr1[j]]);
-          }
-          self.dragCallback(self.dataSource);
-        }
       }
     },
     ready () {
@@ -273,9 +221,6 @@
       },
       hasCallback (item) {
         return item.callback ? true : false
-      },
-      dragCallback (data) {
-        this.onDrag(data);
       },
       // 数据渲染
       callCallback (col, item) {
@@ -361,6 +306,45 @@
       },
       broadcastEvent (eventName, args) {
         this.$broadcast(this.eventPrefix + eventName, args);
+      },
+      dragstartHandle (idx) {
+        // 当拖拽元素开始被拖拽的时候触发的事件，此事件作用在被拖曳元素上
+        if(!this.draggable) return;
+        event.dataTransfer.setData("sourceIdx", idx);
+      },
+      dragenterHandle (idx) {
+        // 当拖曳元素进入目标元素的时候触发的事件，此事件作用在目标元素上
+        if(!this.draggable) return;
+      },
+      dragoverHandle (idx) {
+        // 拖拽元素在目标元素上移动的时候触发的事件，此事件作用在目标元素上
+        if(!this.draggable) return;
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move';
+      },
+      dragleaveHandle (idx) {
+        // 当拖曳元素离开目标元素的时候触发的事件，此事件作用在目标元素上
+        if(!this.draggable) return;
+      },
+      dropHandle (idx) {
+        // 被拖拽的元素在目标元素上同时鼠标放开触发的事件，此事件作用在目标元素上
+        event.preventDefault();
+        if(!this.draggable) return;
+        const sourceIdx = event.dataTransfer.getData("sourceIdx");
+        const targetIdx = idx;
+        if(sourceIdx != targetIdx) {
+          const sourceItem = this.dataSource[sourceIdx];
+          const targetItem = this.dataSource[targetIdx];
+          this.dataSource.$set(targetIdx, sourceItem);
+          this.dataSource.$set(sourceIdx, targetItem);
+          this.onDrag(this.dataSource);
+        }
+      },
+      dragendHandle (idx) {
+        if(!this.draggable) return;
+        // 当拖拽完成后触发的事件，此事件作用在被拖曳元素上
+        event.preventDefault();
+        // event.target.classList.remove(this.styles[0]);
       }
     }
   };

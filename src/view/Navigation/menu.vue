@@ -260,12 +260,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vSwitch from "../../../components/switch";
   import { vMenu, vSubMenu, vMenuItem } from "../../../components/menu";

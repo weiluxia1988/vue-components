@@ -6,19 +6,17 @@
       <div class="content-wrapper">
         <router-view></router-view>
       </div>
+      <footer-nav></footer-nav>
     </div>
   </div>
 </template>
 <script>
-  import Sidebar from './components/navigation.vue';
-  import HeaderNav from './components/header.vue';
+  import sidebar from './components/navigation.vue';
+  import headNav from './components/header.vue';
+  import footerNav from './components/footer.vue';
   import * as Util from "./Util";
-
   export default {
-    components: {
-      headNav: HeaderNav,
-      sidebar: Sidebar
-    },
+    components: { headNav, sidebar, footerNav },
     data: function() {
       return{
         baseInfo: {},
@@ -26,24 +24,9 @@
       }
     },
     methods: {
-      doAjax: function(options) {
-        var self = this;
-        Util.loadData(options.url, options.data, options.method)
-            .then(function(data){
-                options.sucCallback && options.sucCallback(data);
-              }, function(msg) {
-                self.$dispatch('lu-notify', {msg: msg.message, duration: 1000, show: true});
-                options.failCallback && options.failCallback();
-                if(401 == msg.code) {
-                  setTimeout(function() {
-                    window.location.href = msg.data.url;
-                  }, 1500);
-                }
-              });
-      },
       loadData: function() {
         var self = this;
-        self.doAjax({
+        Util.doAjax({
           url: URLConfig('baseInfo'),
           method: 'get',
           sucCallback: function(data) {
@@ -52,15 +35,11 @@
         });
       }
     },
-    events: {
-      'lu-notify': function(obj) {
-        for(var e in obj) {
-          this.$set('notify.' + e, obj[e]);
-        }
-      }
-    },
-    created: function() {
+    created () {
       this.loadData();
+    },
+    ready () {
+      Util.init();
     }
   }
 </script>

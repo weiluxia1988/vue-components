@@ -7,7 +7,7 @@
 </template>
 <script>
   import './affix.scss';
-  import * as Util from "../Util";
+  import * as Util from "../utils";
   // 元素相对于页面左上角的位置
   function getOffset (element) {
     const rect = element.getBoundingClientRect();
@@ -19,6 +19,7 @@
     }
   }
   export default{
+    name: 'v-affix',
     props: {
       prefixCls: {
         type: String,
@@ -54,7 +55,7 @@
     },
     methods: {
       handleScroll () {
-        this.move();
+        if(Util.inDoc(this.$el)) this.move();
       },
       move () {
         const affix = this.affix;
@@ -91,15 +92,19 @@
       }
     },
     ready () {
+      /*
+        高度还需要包含margin
+        宽度跟父元素的宽度一样
+      */
       const elemOffset = getOffset(this.$el);
-      this.$el.style.width = elemOffset.width + 'px';
+      // this.$el.style.width = elemOffset.width + 'px';
       this.$el.style.height = elemOffset.height + 'px';
-      this.move();
+      this.handleScroll();
       window.addEventListener('scroll', this.handleScroll, false);
       window.addEventListener('resize', this.handleScroll, false);
     },
     beforeDestory () {
-      window.removeEventListener('scorll', this.handleScroll, false);
+      window.removeEventListener('scroll', this.handleScroll, false);
       window.removeEventListener('resize', this.handleScroll, false);
     }
   }

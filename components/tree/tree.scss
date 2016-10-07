@@ -1,73 +1,81 @@
 @import '../style/base';
 $tree-prefix: v-tree;
 .#{$tree-prefix}{
-  margin: 0;
-  padding: 5px;
-  font-size: 12px;
-
-  li{
-    padding: 0;
-    margin: 7px 0;
-    list-style: none;
-    white-space: nowrap;
-    outline: none;
-  }
+  background: #ffffff;
 }
-
-.#{$tree-prefix}-switcher{
-  position: relative;
-  margin: 0;
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
-  display: inline-block;
+.#{$tree-prefix}-node{
   cursor: pointer;
-  border: none;
-  outline: none;
-  vertical-align: middle;
-  .fa{
-    position: absolute;
-    left: 5px;
-    transition: transform .3s ease;
-  }
-  
-  &.#{$tree-prefix}-switcher-close .fa{
-    transform: rotate(270deg);
-  }
-}
-
-.#{$tree-prefix}-checkbox{
   white-space: nowrap;
-  cursor: pointer;
-  outline: none;
+}
+.#{$tree-prefix}-node__content{
+  line-height: 36px;
+  height: 36px;
+  & > input {
+    vertical-align: middle;
+  }
+  & > * {
+    margin-right: 3px;
+  }
+  &:hover {
+    background: #e5e9f2;
+  }
+}
+.#{$tree-prefix}-node__expand-icon{
   display: inline-block;
-  line-height: 1;
-  position: relative;
+  width: 0;
+  height: 0;
   vertical-align: middle;
-  margin-right: 4px;
-}
+  margin-left: 10px;
+  border: 6px solid transparent;
+  border-right-width: 0;
+  border-left-color: #99a9bf;
+  border-left-width: 7px;
 
-.#{$tree-prefix}-title{
-  color: #666;
-}
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
 
-.#{$tree-prefix}-child-tree{
-  margin: 0;
-  padding: 0 0 0 18px;
+  &:hover {
+    border-left-color: #999;
+  }
+
+  &.expanded {
+    transform: rotate(90deg);
+  }
+
+  &.is-leaf {
+    border-color: transparent;
+    cursor: default;
+  }
+}
+.#{$tree-prefix}-node__loading-icon{
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #99a9bf;
+  animation: loading .5s linear infinite;
+}
+@-webkit-keyframes loading{
+  0%  {
+    -webkit-transform:rotate(0deg);
+  }
+  100% {
+    -webkit-transform:rotate(360deg);
+  }
+}
+.#{$tree-prefix}-node__label{
+  font-size: 14px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.#{$tree-prefix}-node__children{
+  overflow: hidden;
+  background-color: transparent;
   display: none;
-
-  &.#{$tree-prefix}-child-tree-open{
-    display: block;
-  }
 }
-
-.#{$tree-prefix}-item-disabled{
-  & > .#{$tree-prefix}-title{
-    color: #ccc;
-    cursor: not-allowed;
-  }
-
-  & > .#{$tree-prefix}-switcher{
-    cursor: not-allowed;
-  }
+.#{$tree-prefix}-node.expanded > .#{$tree-prefix}-node__children {
+  display: block;
+}
+.#{$tree-prefix}-node.disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }

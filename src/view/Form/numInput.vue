@@ -1,25 +1,55 @@
 <template>
     <section class="content-header">
-        <h1>数字输入框InputNumber</h1>
+        <h1>Input数字输入框
+            <small>InputNumber</small>
+        </h1>
     </section>
     <section class="content">
         <div class="row">
-            <div class="col-md-2">
-                <h3>演示</h3>
-                <v-num-input :name="oNumInput.name"
-                             :step="oNumInput.step"
-                             :min="oNumInput.min"
-                             :max="oNumInput.max"
-                             :value="oNumInput.value"
-                             @on-change="oNumInput.onChange">
+            <div class="col-md-12">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <i class="fa fa-text-width"></i>
+                        <h3 class="box-title">何时使用</h3>
+                    </div>
+                    <div class="box-body">
+                        <p class="text-muted">让用户只能选择数字时</p>
+                        <pre>
+                            <code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> /&gt;</span></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="page-header"><i class="fa fa-code"></i> 代码演示</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">基本使用</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-4">
+                            <v-num-input :name="oNumInput.name"
+                                         :step="oNumInput.step"
+                                         :min="oNumInput.min"
+                                         :max="oNumInput.max"
+                                         :value="oNumInput.value"
+                                         @on-change="oNumInput.onChange">
 
-                </v-num-input>
+                            </v-num-input>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>使用</h3>
+                <h3 class="box-title">API</h3>
                 <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">InputNumber props</h3>
+                    </div>
                     <div class="box-body">
                         <table class="table table-bordered table-hover dataTable">
                             <thead>
@@ -81,12 +111,6 @@
         </div>
     </section>
 </template>
-<style>
-    h1 {
-        color: #3c8dbc;
-        font-weight: 700;
-    }
-</style>
 <script>
     import vNumInput from '../../../components/numInput';
     export default {

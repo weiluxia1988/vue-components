@@ -19,7 +19,8 @@ module.exports = {
       { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!sass-loader") },
       { test: /\.vue$/, loader: 'vue' },
       { test: /\.(jpg|png|gif)$/, loader: 'url-loader' },
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.json$/, loader: 'json'}
     ]
   },
   postcss:[autoprefixer({browsers:['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8']})],
@@ -27,8 +28,7 @@ module.exports = {
     ExtractLess
   ],
   babel: {
-    presets: ['es2015'],
-    plugins: ['transform-runtime']
+    presets: ['es2015']
   },
   devtool: 'source-map',
   watch: true

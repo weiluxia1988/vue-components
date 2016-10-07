@@ -135,26 +135,10 @@
       }
     },
     methods: {
-      // 加载数据
-      doAjax (options) {
-        var self = this;
-        Util.loadData(options.url, options.data, options.method)
-            .then(function(data){
-                options.sucCallback && options.sucCallback(data);
-              }, function(msg) {
-                self.$dispatch('lu-notify', {msg: msg.message, duration: 1000, show: true});
-                options.failCallback && options.failCallback();
-                if(401 == msg.code) {
-                  setTimeout(function() {
-                    window.location.href = msg.data.url;
-                  }, 1500);
-                }
-              });
-      },
       // 加载列表分类
       loadTypeList () {
         var self = this;
-        self.doAjax({
+        Util.doAjax({
           url: URLConfig('newsTypeList'),
           method: 'get',
           sucCallback: function(data) {
@@ -170,7 +154,7 @@
       // 新闻详细
       loadData (id) {
         var self = this;
-        self.doAjax({
+        Util.doAjax({
           url: URLConfig('newsGet'),
           method: 'get',
           data: {id: id},
@@ -249,7 +233,7 @@
         }
 
         self.btnLoading = true;
-        self.doAjax({
+        Util.doAjax({
           url: url,
           method: 'post',
           data: params,

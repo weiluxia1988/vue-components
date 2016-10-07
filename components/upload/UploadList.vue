@@ -10,11 +10,11 @@
       <i class="fa fa-times" @click="closeHandle(item)"></i>
     </div>
     <div class="v-upload-list-item-progress">
-      <v-progress 
-      :show-info="showInfo" 
-      :percent="item.percent" 
-      :stroke-width="strokeWidth"
-      :bg-color="bgColor">
+      <v-progress
+        :show-info="showInfo"
+        :percent="item.percent"
+        :stroke-width="strokeWidth"
+      ></v-progress>
     </div>
   </div>
 </div>
@@ -23,6 +23,7 @@
 <script>
 import vProgress from '../progress';
 export default {
+  components: {vProgress},
   props: {
     listType: {
       type: String,
@@ -52,7 +53,6 @@ export default {
       return this.listType == 'image' ? 'v-upload-list-image' : 'v-upload-list-text';
     }
   },
-  components: {vProgress},
   methods: {
     closeHandle (file) {
       this.onRemove(file);

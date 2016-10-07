@@ -14,10 +14,11 @@
         <v-popover content='And heres some amazing conten' title="标题" placement="leftBottom">
           <input type="text" value="foucs-左下">
         </v-popover>
-        <v-popover title="标题" placement="topLeft">
+        <v-popover title="标题" placement="topLeft" :show="show">
           <div slot="content">
             <p>And here's some amazing content. It's very engaging. Right?</p>
             <p>内容</p>
+            <button @click="closeHandle">关闭</button>
           </div>
           <v-button type="default" :onclick="openFailHandle">点我-上左</v-button>
         </v-popover>
@@ -136,12 +137,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import vPopover from "../../../components/popover";
@@ -149,11 +144,16 @@
   export default{
     components: { vButton, vPopover },
     data () {
-      return {}
+      return {
+        show: false
+      }
     },
     methods: {
       change (flag) {
         console.log('是否打开弹窗：' + flag);
+      },
+      closeHandle () {
+        this.show = false;
       }
     }
   }

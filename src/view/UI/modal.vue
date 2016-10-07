@@ -14,9 +14,6 @@
           :on-cancel="oModal.onCancel"
           :on-ok="oModal.onOk"
         >
-          **********
-          **********
-          **********
         </v-modal>
       </div>
     </section>
@@ -89,12 +86,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import vModal from "../../../components/modal";

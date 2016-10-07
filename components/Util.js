@@ -35,7 +35,12 @@ function coerceBoolean(val) {
 
 // 转数字
 function coerceNumber(val) {
-  return Number(val);
+  if (typeof val !== 'string') {
+    return val;
+  } else {
+    var parsed = Number(val);
+    return isNaN(parsed) ? val : parsed;
+  }
 }
 
 // 日期转换器

@@ -21,7 +21,7 @@
   </v-popover>
 </template>
 <script>
-  import * as Util from "../Util"; 
+  import * as Util from "../utils"; 
   import vPopover from '../base/popover';
   export default{
     components: { vPopover },

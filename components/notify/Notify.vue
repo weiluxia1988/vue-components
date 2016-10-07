@@ -22,7 +22,7 @@
       },
       duration: {
         type: Number,
-        default: 1.5 // 单位s
+        default: 1.5 // 蜊穂ｽ行
       },
       type: {
         type: String,

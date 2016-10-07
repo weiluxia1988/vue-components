@@ -72,12 +72,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import vPopconfirm from "../../../components/popconfirm";

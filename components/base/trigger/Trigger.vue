@@ -2,7 +2,7 @@
   <slot name="trigger"></slot>
 </template>
 <script>
-  import * as Util from "../../Util"; 
+  import * as Util from "../../utils"; 
   import oPlacements from "./placements"; 
   import slotMixin from "./slotMixin";
   import vPopup from "./Popup.vue"; 
@@ -13,7 +13,7 @@
   const mouseEnterDelay = 0; // 设置鼠标延迟打开时间
   const mouseLeaveDelay = 0.1; // 设置鼠标延迟关闭时间
   const template = `<v-popup 
-                      :align="align" :on-align="onAlign" :show="show" :class-name="currentClassName"
+                      :align="align" :on-align="onAlign" :show.sync="show" :class-name="currentClassName"
                       :get-target="_getTriggerTarget.bind($parent)" 
                       :on-mouse-enter="_onMouseEnter.bind($parent)" 
                       :on-mouse-leave="_onMouseLeave.bind($parent)">
@@ -171,7 +171,10 @@
       document.body.addEventListener('click', function() {
         self.setPopupVisible(false);
       }, false);
-      this.show && this.insertPopup();
+      if(this.show) {
+        this.insertPopup();
+        this.setPopupVisible(true);
+      }
     }
   }
 </script>

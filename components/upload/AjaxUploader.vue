@@ -9,8 +9,10 @@ onError // 上传失败
 <span role="button"
   tabIndex="0"
   @click="clickHandle">
+  <p>{{data.a}}</p>
   <input v-el:file
     type="file"
+    :disabled="disabled"
     style="display: none"
     :accept="accept"
     :multiple="multiple"
@@ -27,9 +29,14 @@ const now = +(new Date());
 function uid() {
   return 'upload-' + now + '-' + (++index);
 }
-
+import * as Util from "../utils";
 export default {
   props: {
+    disabled: {
+      type: Boolean,
+      coerce: Util.coerceBoolean,
+      default: false
+    },
     action: {
       type: String,
       default: ''
@@ -40,6 +47,7 @@ export default {
     },
     multiple: {
       type: Boolean,
+      coerce: Util.coerceBoolean,
       default: false
     },
     data: {
@@ -122,13 +130,15 @@ export default {
       }
 
       const before = this.beforeUpload(file);
-      if (before && before.then) {
-        before.then(() => {
+      this.$nextTick(() => {
+        if (before && before.then) {
+          before.then(() => {
+            this.post(file);
+          })
+        } else if (before !== false) {
           this.post(file);
-        })
-      } else if (before !== false) {
-        this.post(file);
-      }
+        }
+      });
     },
     post (file) {
       let data = this.data

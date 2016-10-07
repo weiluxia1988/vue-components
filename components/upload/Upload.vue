@@ -16,6 +16,7 @@ beforeUpload 上传文件之前的钩子,返回false,则停止上传
 <div class="v-upload">
   <div class="v-upload-select">
     <ajax-upload
+      :disabled="disabled"
       :name="name"
       :action="action"
       :multiple="multiple"
@@ -27,7 +28,7 @@ beforeUpload 上传文件之前的钩子,返回false,则停止上传
       :on-success="onSuccess"
       :on-error="onError"
       :before-upload="beforeUpload">
-      <button type="button" class="btn btn-default"><i class="fa fa-upload"></i>上传文件</button>
+      <button type="button" :disabled="disabled" class="btn btn-default"><i class="fa fa-upload"></i>上传文件</button>
     </ajax-upload>
     <slot></solt>
   </div>
@@ -83,14 +84,21 @@ beforeUpload 上传文件之前的钩子,返回false,则停止上传
   import './upload.scss';
   import AjaxUpload from "./AjaxUploader.vue";
   import UploadList from "./UploadList.vue";
+  import * as Util from "../utils";
   export default {
     props: {
+      disabled: {
+        type: Boolean,
+        coerce: Util.coerceBoolean,
+        default: false
+      },
       name: { 
         type: String,
         default: ''
       },
       multiple: {
         type: Boolean,
+        coerce: Util.coerceBoolean,
         default: false
       },
       action: {
@@ -130,6 +138,7 @@ beforeUpload 上传文件之前的钩子,返回false,则停止上传
       },
       forceAjax: {
         type: Boolean,
+        coerce: Util.coerceBoolean,
         default: true
       }
     },

@@ -94,6 +94,10 @@
   export default{
     components: { vCheckbox, vSearch },
     props: {
+      insert: {
+        type: String,
+        default: 'before'
+      },
       rowKey: {
         type: String,
         default: 'key'
@@ -205,6 +209,9 @@
     watch: {
       dataSource () {
         this.initList();
+      },
+      targetKeys () {
+        this.initList();
       }
     },
     methods: {
@@ -212,6 +219,10 @@
       initList () {
         let self = this;
         let arr1 = [], arr2 = [], obj;
+        self.sourceList = [];
+        self.targetList = [];
+        self.selectSourceList = [];
+        self.selectTargetList = [];
         self.defaultDataSource = JSON.parse(JSON.stringify(self.dataSource));
         self.defaultDataSource.forEach((item, i) => {
           obj = {};
@@ -232,15 +243,21 @@
         }
         self.sourceList = arr2;
         self.targetList = arr1;
+
+        self.defaultTargetKeys = JSON.parse(JSON.stringify(self.targetKeys));
       },
       // 加入到源数组 
       toSourceHandle () {
         const moveList = this.selectTargetList;
         this.selectTargetList.forEach(item => {
           item.isChecked = false;
-          this.targetKeys.$remove(item[this.rowKey]);
+          this.defaultTargetKeys.$remove(item[this.rowKey]);
           this.targetList.$remove(item);
-          this.sourceList.unshift(item);
+          if('after' == this.insert) {
+            this.sourceList.push(item);
+          } else{
+            this.sourceList.unshift(item);
+          }
         });
         // this.sourceList = this.selectTargetList.concat(this.sourceList);
         this.selectTargetList = [];
@@ -253,8 +270,12 @@
         this.selectSourceList.forEach(item => {
           item.isChecked = false;
           this.sourceList.$remove(item);
-          this.targetKeys.push(item[this.rowKey]);
-          this.targetList.unshift(item);
+          this.defaultTargetKeys.push(item[this.rowKey]);
+          if('after' == this.insert) {
+            this.targetList.push(item);
+          } else{
+            this.targetList.unshift(item);
+          }
         });
         this.selectSourceList = [];
         this.$els.target.scrollTop = 0;
@@ -323,7 +344,7 @@
         let self = this, arr1 = [], arr2 = [];
         self.defaultDataSource.forEach((item, i) => {
           if(item[self.filterKey].indexOf(con) > -1) {
-            if(self.targetKeys.includes(item[self.rowKey])) {
+            if(self.defaultTargetKeys.includes(item[self.rowKey])) {
               arr1.push(item);
             } else{
               arr2.push(item);

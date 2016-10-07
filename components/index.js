@@ -1,3 +1,5 @@
+import '../components/style/index.scss';
+
 import vAffix from './affix';
 import vAlert from './alert';
 import vAnimate from './animate';
@@ -20,10 +22,9 @@ import vPopconfirm from './popconfirm';
 import vPopover from './popover';
 import vProgress from './progress';
 import { vRadio, vRadioGroup } from './radio';
-import vSelect from './select';
 import vSwitch from './switch';
-import vTab from './tab';
-import { vTable, vTableSpecial } from './table';
+import { vTabs, vTabItem } from './tab';
+import vTable from './table';
 import vTag from './tag';
 import vTooltip from './tooltip';
 import vTree from './tree';
@@ -52,12 +53,13 @@ export {
   vPagination,
   vPopconfirm,
   vPopover,
+  vProgress,
   vRadio,
-  vSelect,
+  vRadioGroup,
   vSwitch,
-  vTab,
+  vTabs,
+  vTabItem,
   vTable,
-  vTableSpecial,
   vTag,
   vTooltip,
   vTree,

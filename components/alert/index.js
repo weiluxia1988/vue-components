@@ -56,6 +56,9 @@ function notify (type, title, content, onClose) {
     }
   })();
 }
+function close() {
+  instance && instance.destory();
+}
 
 export default {
   info (title = defaultTitle, content = defaultContent, onClose) {
@@ -72,5 +75,8 @@ export default {
   },
   loading (title = defaultTitle, content = defaultContent, onClose) {
     return notify('loading', title, content, onClose);
+  },
+  close () {
+    return close();
   }
 }

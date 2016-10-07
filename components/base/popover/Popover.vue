@@ -26,7 +26,7 @@
 </template>
 <script>
   import './popover.scss';
-  import * as Util from "../../Util"; 
+  import * as Util from "../../utils"; 
   import vTrigger from '../trigger';
   export default{
     components: { vTrigger },

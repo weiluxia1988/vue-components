@@ -1,35 +1,49 @@
 <template>
-	<div class="v-progress-outer">
-		<span v-if="showInfo">
-      {{ percent }}%
-    </span>
-		<div class="v-progress-inner">
-			<div class="v-progress-bg"
-				:style="{width: percent + '%', height: strokeWidth + 'px', background: bgColor}"
-			></div>
-		</div>
-	</div>
+  <component :is="currentView" 
+    :percent="percent"
+    :show-info="showInfo"
+    :stroke-width="strokeWidth"
+    :width="width"
+    :status="status"
+    :format="format"
+  ></component>
 </template>
 <script>
-	import './progress.scss';
-	export default{
-		props: {
-			showInfo: {
-				type: Boolean,
-				default: true
-			},
-	    percent: {
-	    	type: Number,
-	    	default: 0
-	    },
-	    strokeWidth: {
-	    	type: Number,
-	    	default: 10
-	    },
-	    bgColor: {
-	    	type: String,
-	    	default: 'rgb(16, 169, 236)'
-	    }
-		}
-	}
+  import * as Util from "../utils";
+  import progressLine from './ProgressLine.vue';
+  import progressCircle from './ProgressCircle.vue';
+  export default{
+    components: { progressLine, progressCircle },
+    props: {
+      type: {
+        type: String,
+        default: 'line'
+      },
+      showInfo: {
+        type: Boolean,
+        default: true
+      },
+      percent: {
+        type: Number,
+        coerce: Util.coerceNumber,
+        default: 0
+      },
+      strokeWidth: null,
+      width: {
+        type: Number,
+        coerce: Util.coerceNumber,
+        default: 132
+      },
+      status: {
+        type: String,
+        default: 'normal'
+      },
+      format: null
+    },
+    computed: {
+      currentView () {
+        return this.type == 'line' ? 'progressLine' : 'progressCircle';
+      }
+    }
+  }
 </script>

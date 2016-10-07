@@ -1,170 +1,138 @@
 <template>
-  <li :class="liClassName" role="tree-item">
-    <span class="v-tree-switcher" :class="switchClassName" @click="expandHandle">
-      <v-icon v-if="isFolder" type="sort-desc"></v-icon>
-    </span>
-    <span class="v-tree-checkbox" v-if="checkable"><v-checkbox :on-change="checkHandle" :disabled="_disableCheckbox" :checked="isChecked"></v-checkbox></span>
-    <a href="javascript:;" @click="selectHandle" class="v-tree-title">{{{ title }}}</a>
-    <template v-if="isFolder">
-      <v-Animate 
-        :show="isExpanded" 
-        transition-name="slide"
-      >
-        <ul class="v-tree-child-tree" :class="treeChildClassName">
-          <slot></slot>
-        </ul>
-      </v-Animate>
-    </template>
-  </li>
+  <div class="v-tree-node"
+     :class="{ expanded: childrenRendered && expanded, disabled: node.disabled }">
+    <div class="v-tree-node__content" :style="{ 'padding-left': node.level * 16 + 'px' }"
+         @click="handleExpandIconClick">
+      <span class="v-tree-node__expand-icon"
+        :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }"
+        ></span>
+      <v-checkbox v-if="showCheckbox && !node.disableCheckbox" 
+        :indeterminate="node.indeterminate"
+        :disabled="node.disabled"
+        :checked="node.checked" 
+        :on-change="handleCheckChange" 
+      ></v-checkbox>
+      <span
+        v-if="node.loading"
+        class="v-tree-node__loading-icon"
+      >  
+        <v-icon type="rotate-right"></v-icon>
+      </span>
+      <span class="v-tree-node__label">{{ node.label }}</span>
+    </div>
+    <v-animate 
+      :show="expanded" 
+      transition-name="slide"
+    >
+      <div class="v-tree-node__children"
+        v-show="expanded">
+        <v-tree-node v-for="child in node.children" :node="child"></v-tree-node>
+      </div>
+    </v-animate>
+  </div>
 </template>
-<script>
+
+<script type="text/ecmascript-6">
   import './tree.scss';
   import vIcon from '../icon';
   import vCheckbox from '../checkbox';
   import vAnimate from '../animate';
   import * as Util from '../Util'; 
   export default {
-    components: { vIcon, vCheckbox, vAnimate },
+    name: 'v-tree-node',
+    components: { vCheckbox, vAnimate, vIcon},
     props: {
-      disabled: { // 禁掉响应
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: false
-      },
-      disableCheckbox: { // 禁掉checkbox
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: false
-      },
-      key: {
-        type: String,
-        default: ''
-      },
-      title: {
-        type: String,
-        default: ''
-      },
-      multiple: { // 是否支持多选
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: true
-      },
-      checkable: { // 是否支持选中
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: false
-      },
-      isExpanded: { // 是否展开树节点
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: false
-      },
-      isChecked: { // checkbox是否选中
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: true
-      },
-      isFolder: { // 是否父节点
-        type: Boolean,
-        coerce: Util.coerceBoolean,
-        default: true
-      },
-      onItemClick: {
-        type: Function,
-        default () {
-          return new Function();
-        }
-      },
-      onItemCheck: {
-        type: Function,
-        default () {
-          return new Function();
-        }
-      },
-      onItemExpand: {
-        type: Function,
-        default () {
-          return new Function();
+      node: {
+        default() {
+          return {};
         }
       }
     },
-    data () {
+    data() {
       return {
-        toolName: 'treeItem'
-      }
+        $tree: null,
+        checked: false,
+        disabled: false,
+        disableCheckbox: false,
+        expanded: false,
+        childrenRendered: false, 
+        showCheckbox: false,
+        oldChecked: null,
+        oldIndeterminate: null
+      };
     },
-    computed: {
-      liClassName () {
-        return this.disabled ? 'v-tree-item-disabled' : '';
+    watch: {
+      'node.indeterminate'(val) {
+        this.handleSelectChange(this.node.checked, val);
       },
-      switchClassName () {
-        return this.isExpanded ? 'v-tree-switcher-open' : 'v-tree-switcher-close';
-      },
-      treeChildClassName () {
-        return this.isExpanded ? 'v-tree-child-tree-open' : 'v-tree-child-tree-close';
-      },
-      _disableCheckbox () {
-        return !(!this.disableCheckbox && !this.disabled);
+      'node.checked'(val) {
+        this.handleSelectChange(val, this.node.indeterminate);
       }
     },
     methods: {
-      // 展开收起列表
-      expandHandle () {
-        if(this.disabled) return;
-        this.isExpanded = !this.isExpanded;
-        this.onItemExpand();
-      },
-      // 点击树节点
-      selectHandle () {
-        this.onItemClick();
-      },
-      // 是否选中checkbox
-      checkHandle (flag) {
-        this.isChecked = flag;
-        this.setParentChecked();
-        this.setChildChecked(flag);
-        this.onItemCheck();
-      },
-      // 设置父组件
-      setParentChecked () {
-        let $parent = this.$parent;
-        while ('treeItem' === $parent.toolName) {
-          const $children = $parent.$children;
-          const $newChildren = this.getTreeItem($children);
-          let isChecked = true;
-          $newChildren.forEach(($child, index) => {
-            isChecked = $child.isChecked && isChecked;
-          });
-          $parent.isChecked = isChecked;
-          $parent = $parent.$parent;
+      getTree () {
+        var parent = this.$parent;
+        while(!parent.$isTree) {
+          parent = parent.$parent;
         }
+        return parent;
       },
-      // 设置子组件
-      setChildChecked (flag) {
-        function getArray(arr){
-          const $newChildren = self.getTreeItem(arr);
-          $newChildren.forEach(($child, index) => {
-            $child.isChecked = flag;
-            $child.$children && getArray($child.$children);
+      handleSelectChange(checked, indeterminate) {
+        if(this.oldChecked !== checked && this.oldIndeterminate !== indeterminate) {
+          this.$tree.$emit('check-change', this.node.data, checked, indeterminate);
+        }
+        this.oldChecked = checked;
+        this.indeterminate = indeterminate;
+      },
+      handleExpandIconClick(event) {
+        if(this.node.disabled) return;
+        let target = event.target;
+        if (target.tagName.toUpperCase() !== 'DIV' &&
+                target.parentNode.nodeName.toUpperCase() !== 'DIV' ||
+                target.nodeName.toUpperCase() === 'LABLE') {
+          return;
+        }
+        if (this.expanded) {
+          this.node.collapse();
+          this.expanded = false;
+        } else {
+          this.node.expand(() => {
+            this.expanded = true;
+            this.childrenRendered = true;
           });
         }
-        let self = this;
-        let $children = this.$children;
-        getArray($children);
+        // 展开收起回调
+        this.$tree.$emit('node-click', this.node.data);
+        this.$tree.onExpand(this.expanded, this.node.data);
       },
-      // 获得树组件
-      getTreeItem (arr) {
-        return arr.filter((one, index) => {
-          return 'treeItem' === one.toolName;
-        });
-      },
-      // 检查是否含有子树
-      checkFolder (obj) {
-        return this.getTreeItem(obj.$children).length;
+      handleCheckChange(checked) {
+        if(this.node.disabled) return;
+        if (!this.node.indeterminate) {
+          this.node.setChecked(checked, true);
+        }
+        // 复选框回调
+        this.$tree.onCheck(checked, this.node, this.$tree.getCheckedNodes());
       }
     },
-    ready () {
-      this.isFolder = this.checkFolder(this);
+    created() {
+      this.$tree = this.getTree();
+      const tree = this.$tree;
+      if (!tree) {
+        console.warn('Can not find node\'s tree.');
+      } else{
+        this.showCheckbox = tree.showCheckbox;
+      }
+    },
+    ready() {
+      if(this.node.data.checked) {
+        this.node.setChecked(true, true);
+      }
+      if(this.node.data.disabled) {
+        this.node.disabled = this.node.data.disabled; 
+      }
+      if(this.node.data.disableCheckbox) {
+        this.node.disableCheckbox = this.node.data.disableCheckbox; 
+      }
     }
-  }
+  };
 </script>

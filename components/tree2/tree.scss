@@ -1,0 +1,73 @@
+@import '../style/base';
+$tree-prefix: v-tree;
+.#{$tree-prefix}{
+  margin: 0;
+  padding: 5px;
+  font-size: 12px;
+
+  li{
+    padding: 0;
+    margin: 7px 0;
+    list-style: none;
+    white-space: nowrap;
+    outline: none;
+  }
+}
+
+.#{$tree-prefix}-switcher{
+  position: relative;
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+  .fa{
+    position: absolute;
+    left: 5px;
+    transition: transform .3s ease;
+  }
+  
+  &.#{$tree-prefix}-switcher-close .fa{
+    transform: rotate(270deg);
+  }
+}
+
+.#{$tree-prefix}-checkbox{
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  line-height: 1;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.#{$tree-prefix}-title{
+  color: #666;
+}
+
+.#{$tree-prefix}-child-tree{
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: none;
+
+  &.#{$tree-prefix}-child-tree-open{
+    display: block;
+  }
+}
+
+.#{$tree-prefix}-item-disabled{
+  & > .#{$tree-prefix}-title{
+    color: #ccc;
+    cursor: not-allowed;
+  }
+
+  & > .#{$tree-prefix}-switcher{
+    cursor: not-allowed;
+  }
+}

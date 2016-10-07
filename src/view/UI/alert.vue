@@ -8,6 +8,7 @@
         <v-button type="default" :onclick="openSucHandle">成功提示</v-button>
         <v-button type="default" :onclick="openFailHandle">失败提示</v-button>
         <v-button type="default" :onclick="openWarnHandle">警告提示</v-button>
+        <v-button type="default" :onclick="closeHandle">关闭all弹窗</v-button>
       </div>
     </section>
     <section>
@@ -61,12 +62,6 @@
     </section>
   </article>
 </template>
-<style>
-  h1{
-    color: #3c8dbc;
-    font-weight: 700;
-  }
-</style>
 <script>
   import vButton from "../../../components/button";
   import alert from "../../../components/alert";
@@ -80,6 +75,9 @@
       }
     },
     methods: {
+      closeHandle () {
+        alert.close();
+      },
       openHandle () {
         alert.info('info', 'lululululululu');
       },

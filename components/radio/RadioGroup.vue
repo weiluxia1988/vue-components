@@ -20,13 +20,14 @@
       return{
       }
     },
-    props:['groupdata'],
+    props:['groupdata','changef'],
     events: {
       'groupRadio': function(index){
         for(var i=0;i<this.groupdata.length;i++){
           this.groupdata[i].checked = false
           if(i==index){
             this.groupdata[i].checked = true
+            this.changef(this.groupdata[i]);
           }
         }
       }
